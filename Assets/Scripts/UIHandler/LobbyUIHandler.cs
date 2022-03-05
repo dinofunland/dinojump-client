@@ -1,3 +1,4 @@
+using Dinojump.Schemas;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,9 @@ using UnityEngine.UIElements;
 
 public class LobbyUIHandler : MonoBehaviour
 {
-    
+
+    Dictionary<string, PlayerSchema> playerDict;
+
     Label lobbyCode;
     VisualElement playerContainer;
     Button readyButton;
@@ -15,6 +18,7 @@ public class LobbyUIHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerDict = new Dictionary<string, PlayerSchema>();
         InitializeUI();
     }
 
@@ -23,13 +27,14 @@ public class LobbyUIHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnReady_Clicked()
     {
-        Debug.Log("Player ready clicked.");
+        RoomManager.Instance.colyseusRoom.Send("ready");
     }
+
     private void InitializeUI()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -38,16 +43,48 @@ public class LobbyUIHandler : MonoBehaviour
         readyButton = root.Q<Button>("ready-button");
         readyButton.clicked += OnReady_Clicked;
 
-
-        //TODO: replace with actual Players
         playerContainer.Clear();
-        for (int i = 1; i < 4; i++)
+    }
+
+    public void SetLobbyCode(string code)
+    {
+        lobbyCode.text = code;
+    }
+
+    public void AddPlayerToContainer(string key, PlayerSchema playerSchema)
+    {
+        playerDict.Add(key, playerSchema);
+        RenderPlayerNames();
+    }
+
+    public void RemovePlayerFromContainer(string key)
+    {
+        playerDict.Remove(key);
+        RenderPlayerNames();
+    }
+
+    internal void UpdateDictionary(string key, PlayerSchema playerSchema)
+    {
+        playerDict[key] = playerSchema;
+        RenderPlayerNames();
+    }
+
+    void RenderPlayerNames()
+    {
+        playerContainer.Clear();
+        foreach (var player in playerDict)
         {
-            var label = new Label("#Player "+ i);
-            label.AddToClassList("player-list-item");
+            var label = new Label(player.Value.username);
+            if (player.Value.isReady)
+            {
+                label.AddToClassList("player-list-item-ready");
+            }
+            else
+            {
+                label.AddToClassList("player-list-item");
+            }
 
             playerContainer.Add(label);
         }
-        
     }
 }

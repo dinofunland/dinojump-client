@@ -44,3 +44,12 @@
     margin-top: 20px;
     color: rgba(212, 131, 39, 255);
 }
+
+.player-list-item-ready {
+    color: rgb(0, 255, 2);
+    font-size: 15px;
+    -unity-text-align: upper-center;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 5px;
+}

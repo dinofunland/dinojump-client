@@ -37,16 +37,18 @@ public class StartMenuUIHandler : MonoBehaviour
 
     void OnNewLobby_Clicked()
     {
-        GameManager.Instance.EnterLobby();
-        Debug.Log("New Lobby clicked");
+        if (!string.IsNullOrEmpty(playerNameText.text))
+        {
+            //GameManager.Instance.PlayerName = playerNameText.text;
+            GameManager.Instance.EnterLobby(playerNameText.text);
+        } 
     }
 
     void OnJoinLobby_Clicked()
     {
-        if (!string.IsNullOrEmpty(lobbyCodeText.text))
+        if (!string.IsNullOrEmpty(lobbyCodeText.text)  && !string.IsNullOrEmpty(playerNameText.text))
         {
-            GameManager.Instance.EnterLobby(lobbyCodeText.text);
-            Debug.Log("Join Lobby clicked");
+            GameManager.Instance.EnterLobby(playerNameText.text,lobbyCodeText.text);
         }
     }
 }
