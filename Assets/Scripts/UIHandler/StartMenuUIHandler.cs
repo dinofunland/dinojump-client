@@ -31,17 +31,17 @@ public class StartMenuUIHandler : MonoBehaviour
         newLobbyButton = root.Q<Button>("new-lobby-button");
         joinLobbyButton = root.Q<Button>("join-lobby-button");
 
-        newLobbyButton.clicked += OnClickNewLobby;
-        joinLobbyButton.clicked += OnClickJoinLobby;
+        newLobbyButton.clicked += OnNewLobby_Clicked;
+        joinLobbyButton.clicked += OnJoinLobby_Clicked;
     }
 
-    void OnClickNewLobby()
+    void OnNewLobby_Clicked()
     {
         GameManager.Instance.EnterLobby();
         Debug.Log("New Lobby clicked");
     }
 
-    void OnClickJoinLobby()
+    void OnJoinLobby_Clicked()
     {
         if (!string.IsNullOrEmpty(lobbyCodeText.text))
         {

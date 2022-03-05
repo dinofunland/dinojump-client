@@ -14,9 +14,11 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
-        SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
+        if (SceneManager.sceneCount == 1)
+        {
+            SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
+        }
     }
 
     // Update is called once per frame
@@ -37,4 +39,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Game", LoadSceneMode.Additive);
     }
 
+    public void ExitGame()
+    {
+        SceneManager.LoadScene("Main");
+    }
 }
