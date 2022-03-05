@@ -6,10 +6,41 @@
     margin-right: 25px;
     margin-top: 25px;
     margin-bottom: 25px;
+    color: rgba(31, 178, 124, 255);
 }
 
 .button-primary {
 }
 
 .input-field {
+}
+
+.root-container {
+    flex-grow: 1;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.your-score {
+    font-size: 20px;
+    color: rgb(55, 224, 5);
+    -unity-text-align: upper-center;
+}
+
+.player-list-item {
+    color: rgba(255, 0, 0, 255);
+    font-size: 15px;
+    -unity-text-align: upper-center;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 5px;
+}
+
+.subtitle-text {
+    -unity-text-align: upper-center;
+    font-size: 25px;
+    margin-top: 20px;
+    color: rgba(212, 131, 39, 255);
 }

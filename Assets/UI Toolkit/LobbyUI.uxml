@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=e8341d737e445d94086ea565b17d07eb&amp;type=3#style" />
+    <ui:VisualElement class="root-container">
+        <ui:Label text="Lobby" display-tooltip-when-elided="true" name="title-text" class="title-text" />
+        <ui:Label text="#CODE#" display-tooltip-when-elided="true" name="lobby-code-text" enable-rich-text="true" class="your-score" />
+        <ui:VisualElement name="player-container" style="margin-left: 15px; margin-right: 15px; margin-top: 15px; margin-bottom: 15px;">
+            <ui:Label text="Player1" display-tooltip-when-elided="true" class="player-list-item" />
+            <ui:Label text="Player2" display-tooltip-when-elided="true" class="player-list-item" />
+            <ui:Label text="Player3" display-tooltip-when-elided="true" enable-rich-text="false" class="player-list-item" />
+        </ui:VisualElement>
+        <ui:Button text="Ready?" display-tooltip-when-elided="true" name="ready-button" class="button-primary" />
+    </ui:VisualElement>
+</ui:UXML>
