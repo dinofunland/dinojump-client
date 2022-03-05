@@ -1,0 +1,15 @@
+.title-text {
+    align-items: center;
+    -unity-text-align: upper-center;
+    font-size: 30px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.button-primary {
+}
+
+.input-field {
+}

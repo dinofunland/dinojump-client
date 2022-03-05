@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=e8341d737e445d94086ea565b17d07eb&amp;type=3#style" />
+    <ui:VisualElement name="RootContainer" style="flex-grow: 1; margin-left: 300px; margin-right: 300px;">
+        <ui:Label text="Dino Jump" display-tooltip-when-elided="true" name="title" enable-rich-text="false" class="title-text" />
+        <ui:VisualElement name="form-container" style="margin-left: 120px; margin-top: 35px; margin-right: 120px;">
+            <ui:TextField picking-mode="Ignore" label="Lobby Code" value="filler text" is-delayed="true" name="lobby-code-input" class="input-field" />
+            <ui:TextField picking-mode="Ignore" label="Player Name" value="filler text" is-delayed="true" name="player-name-input" class="input-field" />
+            <ui:Button text="New Lobby" display-tooltip-when-elided="true" name="new-lobby-button" class="button-primary" />
+            <ui:Button text="Join Lobby" display-tooltip-when-elided="true" name="join-lobby-button" class="button-primary" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
