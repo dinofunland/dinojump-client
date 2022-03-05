@@ -23,7 +23,8 @@ public class RoomManager : MonoBehaviour
 
         Instance = this;
         
-        colyseusClient = NetworkManager.Instance.CreateClient("wss://" + NetworkManager.Instance.ColyseusServerAddress);
+        // colyseusClient = new ColyseusClient("wss://dinojump-server.herokuapp.com");
+         colyseusClient = new ColyseusClient("ws://localhost:3002");
     }
 
     // Update is called once per frame
@@ -43,20 +44,20 @@ public class RoomManager : MonoBehaviour
         else
             colyseusRoom = await colyseusClient.JoinOrCreate<GameSchema>("GameRoom", roomOptions);
         
-        colyseusRoom.State.players.OnAdd += GameManager.Instance.OnPlayerAdd;
-        colyseusRoom.State.players.OnRemove += GameManager.Instance.OnPlayerRemove;
-        colyseusRoom.State.players.OnChange += GameManager.Instance.OnPlayerChange;
+        colyseusRoom.State.players.OnAdd(GameManager.Instance.OnPlayerAdd);
+        colyseusRoom.State.players.OnRemove(GameManager.Instance.OnPlayerRemove);
+        colyseusRoom.State.players.OnChange(GameManager.Instance.OnPlayerChange);
     }
 
-    public async void Examples(string playerName)
+    public void Examples(string playerName)
     {
         // colyseusRoom = await colyseusClient.JoinById<GameSchema>("248A", roomOptions);
         Debug.Log("Thats My SESSION_ID: " + colyseusRoom.SessionId);
 
-        colyseusRoom.State.players.OnChange += (string key, PlayerSchema playerSchema) =>
+        colyseusRoom.State.players.OnChange((string key, PlayerSchema playerSchema) =>
         {
             Debug.Log("Changed" + key);
             // Update PlayerObject in scene with key
-        };
+        });
     }
 }
