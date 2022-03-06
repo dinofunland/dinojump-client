@@ -10,11 +10,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     LobbyUIHandler lobbyUIHandler;
+    SpawnManager spawnManager;
 
     [SerializeField]
     public GameObject playerPrefab;
 
-    public string PlayerName;
+    public Dictionary<string, PlayerSchema> playerList;
+
+    public string myPlayerKey;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,17 +50,14 @@ public class GameManager : MonoBehaviour
         await RoomManager.Instance.ConnectLobby(playerName);
         
         lobbyUIHandler = GameObject.Find("LobbyUI").GetComponent<LobbyUIHandler>();
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+
         if (RoomManager.Instance.colyseusRoom != null)
         {
             lobbyUIHandler.SetLobbyCode(RoomManager.Instance.colyseusRoom.RoomId);
         }
     }
 
-    internal void OnPlayerChange(string key, PlayerSchema playerSchema)
-    {
-        Debug.Log("Player Changed: " + key);
-        lobbyUIHandler.UpdateDictionary(key, playerSchema);
-    }
 
     IEnumerator AwaitGameScene()
     {
@@ -66,6 +66,21 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+    }
+
+    internal void OnPlatformAdd(string key, PlatformSchema value)
+    {
+        spawnManager.SpawnPlatform(key, value);
+    }
+
+    internal void OnPlatformChange(string key, PlatformSchema value)
+    {
+        spawnManager.UpdatePlatform(key,value);
+    }
+
+    internal void OnPlatformRemove(string key, PlatformSchema value)
+    {
+        spawnManager.RemovePlatform(key);
     }
 
     //Join Lobby
@@ -87,28 +102,37 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Main");
     }
-
+    #region PlayerListeners
     public void OnPlayerAdd(string key, PlayerSchema playerSchema)
     {
         Debug.Log("Player Added, Key: " + key);
 
-        if (lobbyUIHandler != null)
-        {
-            lobbyUIHandler.AddPlayerToContainer(key, playerSchema);
-        }
-
+        playerList.Add(key, playerSchema);
+        RefreshLobbyUI();
         var newPlayer = Instantiate(playerPrefab);
+        newPlayer.transform.Find("Arrow").gameObject.SetActive(key == myPlayerKey);
         newPlayer.GetComponent<PlayerController>().playerSchema = playerSchema;
 
     }
+    internal void OnPlayerChange(string key, PlayerSchema playerSchema)
+    {
+        playerList[key] = playerSchema;
+        lobbyUIHandler.RenderPlayerNames();
+    }
     public void OnPlayerRemove(string key, PlayerSchema playerSchema)
     {
-        Debug.Log("Player Removed, Key: " + key);
+        playerList.Remove(key);
+        Destroy(FindObjectsOfType<PlayerController>().FirstOrDefault(p => p.playerSchema.sessionId == key).gameObject);
+        RefreshLobbyUI();
+    }
 
+    void RefreshLobbyUI()
+    {
         if (lobbyUIHandler != null)
         {
-            lobbyUIHandler.RemovePlayerFromContainer(key);
+            lobbyUIHandler.RenderPlayerNames();
         }
-        Destroy(FindObjectsOfType<PlayerController>().FirstOrDefault(p => p.playerSchema.sessionId == key).gameObject);
     }
+
+    #endregion
 }

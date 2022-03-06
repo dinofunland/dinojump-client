@@ -30,9 +30,9 @@ public class LobbyUIHandler : MonoBehaviour
 
     }
 
-    void OnReady_Clicked()
+    async void OnReady_Clicked()
     {
-        RoomManager.Instance.colyseusRoom.Send("ready");
+        await RoomManager.Instance.colyseusRoom.Send("ready");
     }
 
     private void InitializeUI()
@@ -42,7 +42,6 @@ public class LobbyUIHandler : MonoBehaviour
         playerContainer = root.Q<VisualElement>("player-container");
         readyButton = root.Q<Button>("ready-button");
         readyButton.clicked += OnReady_Clicked;
-
         playerContainer.Clear();
     }
 
@@ -50,29 +49,11 @@ public class LobbyUIHandler : MonoBehaviour
     {
         lobbyCode.text = code;
     }
-
-    public void AddPlayerToContainer(string key, PlayerSchema playerSchema)
+    public void RenderPlayerNames()
     {
-        playerDict.Add(key, playerSchema);
-        RenderPlayerNames();
-    }
-
-    public void RemovePlayerFromContainer(string key)
-    {
-        playerDict.Remove(key);
-        RenderPlayerNames();
-    }
-
-    internal void UpdateDictionary(string key, PlayerSchema playerSchema)
-    {
-        playerDict[key] = playerSchema;
-        RenderPlayerNames();
-    }
-
-    void RenderPlayerNames()
-    {
+        //clear and redraw list
         playerContainer.Clear();
-        foreach (var player in playerDict)
+        foreach (var player in GameManager.Instance.playerList)
         {
             var label = new Label(player.Value.username);
             if (player.Value.isReady)
