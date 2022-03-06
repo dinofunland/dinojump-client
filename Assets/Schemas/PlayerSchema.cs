@@ -26,5 +26,8 @@ namespace Dinojump.Schemas {
 
 		[Type(5, "ref", typeof(InputSchema))]
 		public InputSchema input = new InputSchema();
+
+		[Type(6, "number")]
+		public float skin = default(float);
 	}
 }
