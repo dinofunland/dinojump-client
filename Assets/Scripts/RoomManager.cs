@@ -23,8 +23,8 @@ public class RoomManager : MonoBehaviour
 
         Instance = this;
         
-        // colyseusClient = new ColyseusClient("wss://dinojump-server.herokuapp.com");
-         colyseusClient = new ColyseusClient("ws://localhost:3002");
+        colyseusClient = new ColyseusClient("wss://dinojump-server.herokuapp.com");
+         //colyseusClient = new ColyseusClient("ws://localhost:3002");
     }
 
     // Update is called once per frame

@@ -7,32 +7,22 @@ using UnityEngine.UIElements;
 
 public class LobbyUIHandler : MonoBehaviour
 {
-
-    Dictionary<string, PlayerSchema> playerDict;
-
     Label lobbyCode;
     VisualElement playerContainer;
     Button readyButton;
 
-
     // Start is called before the first frame update
     void Start()
     {
-        playerDict = new Dictionary<string, PlayerSchema>();
         InitializeUI();
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     async void OnReady_Clicked()
     {
-        await RoomManager.Instance.colyseusRoom.Send("ready");
+        if(RoomManager.Instance?.colyseusRoom != null)
+        {
+            await RoomManager.Instance.colyseusRoom.Send("ready");
+        }
     }
 
     private void InitializeUI()
