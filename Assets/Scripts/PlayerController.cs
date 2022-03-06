@@ -7,9 +7,21 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerSchema playerSchema;
     [SerializeField] public string playerKey;
+
+    Animator playerAnimator;
+
+    [SerializeField]
+    AnimatorOverrideController blueAnim;
+    [SerializeField]
+    AnimatorOverrideController yellowAnim;
+    [SerializeField]
+    AnimatorOverrideController greenAnim;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        playerAnimator = GetComponent<Animator>();
         
     }
 
@@ -17,5 +29,24 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         playerKey = playerSchema?.sessionId;
+        SetPlayerSkin();
+    }
+
+    private void SetPlayerSkin()
+    {
+        //TODO: Change Player Sprite & Animator
+        DinoPicker.DinoSkin current = (DinoPicker.DinoSkin)playerSchema.skin;
+        switch (current)
+        {
+            default:
+                playerAnimator.runtimeAnimatorController = blueAnim;
+                break;
+            case DinoPicker.DinoSkin.Yellow:
+                playerAnimator.runtimeAnimatorController = yellowAnim;
+                break;
+            case DinoPicker.DinoSkin.Green:
+                playerAnimator.runtimeAnimatorController = greenAnim;
+                break;
+        }
     }
 }

@@ -14,25 +14,31 @@ public class InputManager : MonoBehaviour
         
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         jumpInput = Input.GetButton("Jump");
         modulationInput = Input.GetButton("Fire3");
-
-        if (RoomManager.Instance?.colyseusRoom != null) 
+        if (RoomManager.Instance?.colyseusRoom != null)
         {
-            if (horizontalInput == 0)
-                RoomManager.Instance.colyseusRoom.Send("move", new { left = false, right = false }); ;
-            if (horizontalInput > 0)
-                RoomManager.Instance.colyseusRoom.Send("move", new { left = false, right = true }); ;
-            if (horizontalInput < 0)
-                RoomManager.Instance.colyseusRoom.Send("move", new { left = true, right = false }); ;
-            if (jumpInput)
-                RoomManager.Instance.colyseusRoom.Send("jump");
-            if (modulationInput)
-                RoomManager.Instance.colyseusRoom.Send("mod");
+            SendPLayerMovement();
         }
+    }
+
+    async void SendPLayerMovement()
+    {
+        if (horizontalInput == 0)
+            await RoomManager.Instance.colyseusRoom.Send("move", new { left = false, right = false });
+        if (horizontalInput > 0)
+            await RoomManager.Instance.colyseusRoom.Send("move", new { left = false, right = true });
+        if (horizontalInput < 0)
+            await RoomManager.Instance.colyseusRoom.Send("move", new { left = true, right = false });
+        if (jumpInput)
+            await RoomManager.Instance.colyseusRoom.Send("jump");
+        if (modulationInput)
+            await RoomManager.Instance.colyseusRoom.Send("mod");
     }
 }

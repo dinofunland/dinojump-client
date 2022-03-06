@@ -6,7 +6,7 @@
     margin-right: 25px;
     margin-top: 25px;
     margin-bottom: 25px;
-    color: rgba(31, 178, 124, 255);
+    color: rgb(31, 178, 124);
 }
 
 .button-primary {
@@ -30,7 +30,7 @@
 }
 
 .player-list-item {
-    color: rgba(255, 0, 0, 255);
+    color: rgb(255, 0, 0);
     font-size: 15px;
     -unity-text-align: upper-center;
     margin-left: 100px;
@@ -42,7 +42,7 @@
     -unity-text-align: upper-center;
     font-size: 25px;
     margin-top: 20px;
-    color: rgba(212, 131, 39, 255);
+    color: rgb(212, 131, 39);
 }
 
 .player-list-item-ready {
@@ -52,4 +52,90 @@
     margin-left: 100px;
     margin-right: 100px;
     margin-top: 5px;
+}
+
+.dino-option {
+    width: 64px;
+    height: 64px;
+    background-image: none;
+    background-color: rgba(88, 88, 88, 0);
+    border-left-color: rgb(0, 255, 34);
+    border-right-color: rgb(0, 255, 34);
+    border-top-color: rgb(0, 255, 34);
+    border-bottom-color: rgb(0, 255, 34);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.dino-option-active {
+    width: 64px;
+    height: 64px;
+    background-image: none;
+    background-color: rgba(88, 88, 88, 0);
+    border-left-color: rgba(0, 255, 34, 0.47);
+    border-right-color: rgba(0, 255, 34, 0.47);
+    border-top-color: rgba(0, 255, 34, 0.47);
+    border-bottom-color: rgba(0, 255, 34, 0.47);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.blueDinoSprite {
+    background-image: url('project://database/Assets/Sprites/BlueRex/BlueRex_OG.png?fileID=2800000&guid=b4b77b28f0a895e44abac65b5e95caa4&type=3#BlueRex_OG');
+    width: 64px;
+    height: 64px;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.59);
+}
+
+.blueDinoSprite:hover {
+    background-image: url('project://database/Assets/Sprites/BlueRex/BlueRex_OG.png?fileID=2800000&guid=b4b77b28f0a895e44abac65b5e95caa4&type=3#BlueRex_OG');
+    width: 64px;
+    height: 64px;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.greenDinoSprite {
+    width: 64px;
+    height: 64px;
+    background-image: url('project://database/Assets/Sprites/GreenRex/Idle/GreenRex_Idle1.png?fileID=2800000&guid=76b6ae70fd2cc944da512bce1e8d68e4&type=3#GreenRex_Idle1');
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.59);
+}
+
+.greenDinoSprite:hover {
+    width: 64px;
+    height: 64px;
+    background-image: url('project://database/Assets/Sprites/GreenRex/Idle/GreenRex_Idle1.png?fileID=2800000&guid=76b6ae70fd2cc944da512bce1e8d68e4&type=3#GreenRex_Idle1');
+    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
+}
+
+.yellowDinoSprite {
+    width: 64px;
+    height: 64px;
+    background-image: url('project://database/Assets/Sprites/YellowRex/Idle/YellowRex_Idle1.png?fileID=2800000&guid=b91bd093e492c4744b655c29fe467103&type=3#YellowRex_Idle1');
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.59);
+}
+
+.yellowDinoSprite:hover {
+    width: 64px;
+    height: 64px;
+    background-image: url('project://database/Assets/Sprites/YellowRex/Idle/YellowRex_Idle1.png?fileID=2800000&guid=b91bd093e492c4744b655c29fe467103&type=3#YellowRex_Idle1');
+    -unity-background-image-tint-color: rgb(255, 255, 255);
 }

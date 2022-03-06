@@ -4,6 +4,11 @@
         <ui:Label text="Lobby" display-tooltip-when-elided="true" name="title-text" class="title-text" />
         <ui:Label text="#CODE#" display-tooltip-when-elided="true" name="lobby-code-text" enable-rich-text="true" class="your-score" />
         <ui:VisualElement name="player-container" style="margin-left: 15px; margin-right: 15px; margin-top: 15px; margin-bottom: 15px;" />
+        <ui:VisualElement name="dinopicker" style="flex-direction: row; flex-grow: 0; justify-content: center; margin-left: 20px; margin-right: 20px; margin-top: 20px; margin-bottom: 20px;">
+            <ui:Button display-tooltip-when-elided="true" name="blue" class="dino-option blueDinoSprite" />
+            <ui:Button display-tooltip-when-elided="true" name="green" class="dino-option greenDinoSprite" />
+            <ui:Button display-tooltip-when-elided="true" name="yellow" class="dino-option yellowDinoSprite" />
+        </ui:VisualElement>
         <ui:Button text="Ready?" display-tooltip-when-elided="true" name="ready-button" class="button-primary" />
     </ui:VisualElement>
 </ui:UXML>
