@@ -109,19 +109,26 @@ public class GameManager : MonoBehaviour
 
         playerList.Add(key, playerSchema);
         RefreshLobbyUI();
-        var newPlayer = Instantiate(playerPrefab);
-        newPlayer.transform.Find("Arrow").gameObject.SetActive(key == myPlayerKey);
-        newPlayer.GetComponent<PlayerController>().playerSchema = playerSchema;
+        var player = Instantiate(playerPrefab);
+        player.transform.Find("Arrow").gameObject.SetActive(key == myPlayerKey);
+        var playerController = player.GetComponent<PlayerController>();
+        playerController.playerSchema = playerSchema;
+
+        playerSchema.OnChange(() => {
+            Debug.Log(playerSchema);
+            playerController.playerSchema = playerSchema;
+        });
 
         playerSchema.OnIsReadyChange((current, previous) => {
             Debug.Log("ON IS READY CHANGE");
             Debug.Log(current);
         });
-
+        /*
         playerSchema.position.OnChange(() => {
             Debug.Log("POSTITION CHANGE");
             Debug.Log(playerSchema.position.x);
         });
+        */
     }
     internal void OnPlayerChange(string key, PlayerSchema playerSchema)
     {
