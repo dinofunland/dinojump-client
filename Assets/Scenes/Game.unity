@@ -296,4 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a77f0a492b03554cbb00426261348e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformPrefabs:
+  - {fileID: 951714698920710899, guid: f014309cfb577e7408d0e54540cc3a1a, type: 3}
+  - {fileID: 8157640627964921600, guid: e56a773e88b80944ebbd5dd8ae1b7655, type: 3}
+  - {fileID: 8157640627964921600, guid: e91c8e7e8c1d2d44993a51b280005944, type: 3}
   speed: 0

@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Game"));
     }
 
     internal void OnGameStepChange(string currentValue, string previousValue)

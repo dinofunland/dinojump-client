@@ -6,14 +6,14 @@ using System.Linq;
 
 public class SpawnManager : MonoBehaviour
 {
-    GameObject[] platformPrefabs;
+    [SerializeField]
+    List<GameObject> platformPrefabs;
 
     [SerializeField]
-    float speed;
+    float lerpSpeed;
     public void SpawnPlatform(string key, PlatformSchema platSchema)
     {
-        return;
-        // TODO
+        Debug.Log("SpawnManager.SpawnPlatform! Type: " + platSchema.type);
         GameObject prefab;
         switch (platSchema.type)
         {
@@ -48,7 +48,7 @@ public class SpawnManager : MonoBehaviour
     internal void UpdatePlatform(string key, PlatformSchema value)
     {
         var platform = FindObjectsOfType<PlatformBase>().FirstOrDefault(p => p.Key == key).gameObject;
-        Vector3.Lerp(platform.transform.position, new Vector2(value.position.x, value.position.y), Time.deltaTime * speed);
+        Vector3.Lerp(platform.transform.position, new Vector2(value.position.x, value.position.y), Time.deltaTime * lerpSpeed);
         platform.GetComponent<PlatformBase>().PlatformSchema = value;
     }
 }
