@@ -12,6 +12,8 @@ public class SpawnManager : MonoBehaviour
     float speed;
     public void SpawnPlatform(string key, PlatformSchema platSchema)
     {
+        return;
+        // TODO
         GameObject prefab;
         switch (platSchema.type)
         {

@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         playerKey = playerSchema?.sessionId;
+        return;
+        // TODO
         SetPlayerSkin();
     }
 
