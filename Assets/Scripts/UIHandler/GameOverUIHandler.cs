@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class GameOverUIHandler : MonoBehaviour
@@ -26,12 +27,17 @@ public class GameOverUIHandler : MonoBehaviour
 
     void OnExitGame_Clicked()
     {
+        SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("Game");
 
+        GameManager.Instance.myPlayerKey = "";
     }
 
     void OnBackToLobby_Clicked()
     {
-
+        //Send Return to Lobby
+        return;
+        RoomManager.Instance.SendMessage("", "");
     }
 
     private void InitializeUI()

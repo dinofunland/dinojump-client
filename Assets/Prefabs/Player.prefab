@@ -205,6 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpeedLerp: 0.02
   playerKey: 
-  blueAnim: {fileID: 0}
-  yellowAnim: {fileID: 0}
-  greenAnim: {fileID: 0}
+  blueAnim: {fileID: 22100000, guid: e2d9497d5fdc64c4a90ebdd77065857e, type: 2}
+  yellowAnim: {fileID: 22100000, guid: f5c8c5ce1c06084459d007ee8c022493, type: 2}
+  greenAnim: {fileID: 22100000, guid: 680720a476f709340bfd4a32978be527, type: 2}
+  purpleAnim: {fileID: 22100000, guid: 90a3527e72bca5947a9ed5c6de438acf, type: 2}

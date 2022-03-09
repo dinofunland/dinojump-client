@@ -40,7 +40,7 @@ public class StartMenuUIHandler : MonoBehaviour
         if (!string.IsNullOrEmpty(playerNameText.text))
         {
             //GameManager.Instance.PlayerName = playerNameText.text;
-            GameManager.Instance.EnterLobby(playerNameText.text);
+            GameManager.Instance.ConnectToLobby(playerNameText.text);
         } 
     }
 
@@ -48,7 +48,7 @@ public class StartMenuUIHandler : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(lobbyCodeText.text)  && !string.IsNullOrEmpty(playerNameText.text))
         {
-            GameManager.Instance.EnterLobby(playerNameText.text,lobbyCodeText.text);
+            GameManager.Instance.ConnectToLobby(playerNameText.text, lobbyCodeText.text);
         }
     }
 }

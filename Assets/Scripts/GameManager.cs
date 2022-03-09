@@ -16,6 +16,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GameObject playerPrefab;
 
+    [SerializeField]
+    private GameObject countdownUI;
+    [SerializeField]
+    private GameObject gameOverUI;
+    [SerializeField]
+    private GameObject lobbyUI;
+
     public Dictionary<string, PlayerSchema> playerList = new Dictionary<string, PlayerSchema>();
 
     public string myPlayerKey;
@@ -32,33 +39,7 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
         }
-
-
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    //Create New
-    public async void EnterLobby(string playerName)
-    {
-        SceneManager.UnloadSceneAsync("Menu");
-        StartCoroutine(AwaitGameScene());
-
-        await RoomManager.Instance.ConnectLobby(playerName);
-
-        lobbyUIHandler = GameObject.Find("LobbyUI").GetComponent<LobbyUIHandler>();
-        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-
-        if (RoomManager.Instance.colyseusRoom != null)
-        {
-            lobbyUIHandler.SetLobbyCode(RoomManager.Instance.colyseusRoom.RoomId);
-        }
-    }
-
 
     IEnumerator AwaitGameScene()
     {
@@ -67,46 +48,46 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 
     internal void OnGameStepChange(string currentValue, string previousValue)
     {
+        Debug.Log("New Gamestep:" + currentValue);
+
         switch (currentValue)
         {
             default:
-                //ShowLobbyUI
-                GameObject.Find("LobbyUI").SetActive(false);
+                gameOverUI.SetActive(false);
+                PrepareLobby();
                 break;
             case "Starting":
-                GameObject.Find("CountdownUI").SetActive(true);
+                lobbyUI.SetActive(false);
+                countdownUI.SetActive(true);
                 StartCoroutine("CountDown");
-                    break;
+                break;
             case "Ongoing":
-                //Hide Countdown
+                countdownUI.SetActive(false);
                 break;
             case "Ended":
-                //Show Scoreboard
+                gameOverUI.SetActive(true);
                 break;
-
-
         }
     }
 
     IEnumerator CountDown()
     {
+        var countDownLabel = countdownUI.GetComponent<UIDocument>().rootVisualElement.Q<Label>("countdown-text");
         int i = 0;
         while (i < 5)
         {
             var countdownValue = 5 - i;
-            var text = GameObject.Find("CountdownUI").GetComponent<UIDocument>().rootVisualElement.Q<Label>("countdown-text");
-            text.text = countdownValue.ToString();
+            countDownLabel.text = countdownValue.ToString();
             i++;
             yield return new WaitForSeconds(1);
-            
-            GameObject.Find("CountdownUI").SetActive(false);
         }
-        
-        
+
+        countDownLabel.text = "Go!";
     }
 
     
@@ -127,14 +108,26 @@ public class GameManager : MonoBehaviour
     }
 
     //Join Lobby
-    public async void EnterLobby(string playerName, string code)
+    public async void ConnectToLobby(string playerName, string code)
     {
+        await RoomManager.Instance.ConnectLobby(playerName, code);
         SceneManager.UnloadSceneAsync("Menu");
         StartCoroutine(AwaitGameScene());
+    }
 
-        await RoomManager.Instance.ConnectLobby(playerName, code);
+    //Create New
+    public async void ConnectToLobby(string playerName)
+    {
+        await RoomManager.Instance.ConnectLobby(playerName);
+        SceneManager.UnloadSceneAsync("Menu");
+        StartCoroutine(AwaitGameScene());
+    }
 
-        lobbyUIHandler = GameObject.Find("LobbyUI").GetComponent<LobbyUIHandler>();
+    void PrepareLobby()
+    {
+        lobbyUI.SetActive(true);
+        lobbyUIHandler = lobbyUI.GetComponent<LobbyUIHandler>();       
+
         if (RoomManager.Instance.colyseusRoom != null)
         {
             lobbyUIHandler.SetLobbyCode(RoomManager.Instance.colyseusRoom.RoomId);
@@ -145,6 +138,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Main");
     }
+
     #region PlayerListeners
     public void OnPlayerAdd(string key, PlayerSchema playerSchema)
     {
@@ -177,6 +171,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("player change");
         playerList[key] = playerSchema;
+        if (lobbyUIHandler == null)
+        {
+            lobbyUIHandler = lobbyUI.GetComponent<LobbyUIHandler>();
+        }
         lobbyUIHandler.RenderPlayerNames();
     }
     public void OnPlayerRemove(string key, PlayerSchema playerSchema)

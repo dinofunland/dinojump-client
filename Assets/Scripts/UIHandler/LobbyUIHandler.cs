@@ -12,7 +12,7 @@ public class LobbyUIHandler : MonoBehaviour
     Button readyButton;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         InitializeUI();
     }
@@ -21,10 +21,19 @@ public class LobbyUIHandler : MonoBehaviour
     {
         if(RoomManager.Instance?.colyseusRoom != null)
         {
-            await RoomManager.Instance.colyseusRoom.Send("ready");
-            readyButton.AddToClassList("is-ready-button");
-            readyButton.text = "Ready!";
-            readyButton.SetEnabled(false);
+            try
+            {
+                await RoomManager.Instance.colyseusRoom.Send("ready");
+                readyButton.AddToClassList("is-ready-button");
+                readyButton.text = "Ready!";
+                readyButton.SetEnabled(false);
+            }
+            catch 
+            {
+                readyButton.RemoveFromClassList("is-ready-button");
+                readyButton.text = "Ready?";
+                readyButton.SetEnabled(true);
+            }     
         }
     }
 

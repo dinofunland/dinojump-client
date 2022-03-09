@@ -47,7 +47,7 @@ public class RoomManager : MonoBehaviour
         colyseusRoom.State.players.OnAdd(GameManager.Instance.OnPlayerAdd);
         colyseusRoom.State.players.OnRemove(GameManager.Instance.OnPlayerRemove);
         colyseusRoom.State.players.OnChange(GameManager.Instance.OnPlayerChange);
-        colyseusRoom.State.OnGameStepChange(GameManager.Instance.OnGameStepChange)
+        colyseusRoom.State.OnGameStepChange(GameManager.Instance.OnGameStepChange);
 
         // TODO handle platforms
         /*
