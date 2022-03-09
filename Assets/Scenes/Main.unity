@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f450dbee0a550e48889a1d809a2cd4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _colyseusSettings: {fileID: 11400000, guid: 9b4dc0bf3100a824d8aee2ce5fdcc423, type: 2}
+  _colyseusSettings: {fileID: 0}
 --- !u!4 &230661579
 Transform:
   m_ObjectHideFlags: 0
