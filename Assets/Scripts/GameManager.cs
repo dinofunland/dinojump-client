@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
         if (RoomManager.Instance.colyseusRoom != null)
         {
-            lobbyUIHandler.SetLobbyCode(RoomManager.Instance.colyseusRoom.RoomId);
+            lobbyUIHandler.SetLobbyCode(RoomManager.Instance.colyseusRoom.Id);
         }
     }
 
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         lobbyUIHandler = GameObject.Find("LobbyUI").GetComponent<LobbyUIHandler>();
         if (RoomManager.Instance.colyseusRoom != null)
         {
-            lobbyUIHandler.SetLobbyCode(RoomManager.Instance.colyseusRoom.RoomId);
+            lobbyUIHandler.SetLobbyCode(RoomManager.Instance.colyseusRoom.Id);
         }
     }
 
