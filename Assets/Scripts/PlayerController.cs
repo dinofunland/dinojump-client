@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     AnimatorOverrideController yellowAnim;
     [SerializeField]
     AnimatorOverrideController greenAnim;
+    [SerializeField]
+    AnimatorOverrideController purpleAnim;
 
 
     // Start is called before the first frame update
@@ -58,6 +60,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case DinoPicker.DinoSkin.Green:
                 playerAnimator.runtimeAnimatorController = greenAnim;
+                break;
+            case DinoPicker.DinoSkin.Purple:
+                playerAnimator.runtimeAnimatorController = purpleAnim;
                 break;
         }
     }

@@ -13,6 +13,7 @@ public class DinoPicker : MonoBehaviour
     Button btnBlue;
     Button btnYellow;
     Button btnGreen;
+    Button btnPurple;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,8 @@ public class DinoPicker : MonoBehaviour
         btnYellow.clicked += OnYellowDinoClicked;
         btnGreen = root.Q<Button>("green");
         btnGreen.clicked += OnGreenDinoClicked;
+        btnPurple = root.Q<Button>("purple");
+        btnPurple.clicked += OnPurpleDinoClicked;
         //int i = 0;
         //foreach (var dino in dinoSprites)
         //{
@@ -89,6 +92,14 @@ public class DinoPicker : MonoBehaviour
         ResetButtonActive();
         btnGreen.AddToClassList("dino-option-active");
     }
+    private void OnPurpleDinoClicked()
+    {
+        Debug.Log("Purple Dino sent.");
+        ActiveDino = DinoSkin.Purple;
+        SendSkinInfo();
+        ResetButtonActive();
+        btnPurple.AddToClassList("dino-option-active");
+    }
 
 
     private async void SendSkinInfo()
@@ -112,6 +123,7 @@ public class DinoPicker : MonoBehaviour
     {
         Blue = 0,
         Green = 1,
-        Yellow = 2
+        Yellow = 2,
+        Purple = 3
     }
 }

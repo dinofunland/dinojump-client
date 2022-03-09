@@ -115,15 +115,15 @@
 .greenDinoSprite {
     width: 64px;
     height: 64px;
-    background-image: url('project://database/Assets/Sprites/GreenRex/Idle/GreenRex_Idle1.png?fileID=2800000&guid=76b6ae70fd2cc944da512bce1e8d68e4&type=3#GreenRex_Idle1');
+    background-image: url('project://database/Assets/Sprites/LongNeck/ZigarreNeck/LongNeck_OGZigarre.gif?fileID=2800000&guid=7798423245829ce4fb11abf3e24bd492&type=3#LongNeck_OGZigarre');
     -unity-background-image-tint-color: rgba(255, 255, 255, 0.59);
 }
 
 .greenDinoSprite:hover {
     width: 64px;
     height: 64px;
-    background-image: url('project://database/Assets/Sprites/GreenRex/Idle/GreenRex_Idle1.png?fileID=2800000&guid=76b6ae70fd2cc944da512bce1e8d68e4&type=3#GreenRex_Idle1');
-    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
+    background-image: url('project://database/Assets/Sprites/LongNeck/ZigarreNeck/LongNeck_OGZigarre.gif?fileID=2800000&guid=7798423245829ce4fb11abf3e24bd492&type=3#LongNeck_OGZigarre');
+    -unity-background-image-tint-color: rgb(255, 255, 255);
 }
 
 .yellowDinoSprite {

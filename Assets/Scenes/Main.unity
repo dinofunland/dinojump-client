@@ -379,6 +379,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: 680720a476f709340bfd4a32978be527, type: 2}
     - target: {fileID: 915265879947715567, guid: 8714f5621de508c4ba86671cec605d01, type: 3}
+      propertyPath: purpleAnim
+      value: 
+      objectReference: {fileID: 22100000, guid: 90a3527e72bca5947a9ed5c6de438acf, type: 2}
+    - target: {fileID: 915265879947715567, guid: 8714f5621de508c4ba86671cec605d01, type: 3}
       propertyPath: yellowAnim
       value: 
       objectReference: {fileID: 22100000, guid: f5c8c5ce1c06084459d007ee8c022493, type: 2}
