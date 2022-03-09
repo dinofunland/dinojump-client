@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{
+{    
     public float SpeedLerp = .02f;
     public PlayerSchema playerSchema;
     [SerializeField] public string playerKey;
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         playerKey = playerSchema?.sessionId;
-
+        
         if (playerSchema?.position != null)
         {
             var t = Time.deltaTime / SpeedLerp;
@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour
             transform.position = Vector2.Lerp(transform.position, desiredPostion, t);
         }
 
-        return;
         SetPlayerSkin();
 
         

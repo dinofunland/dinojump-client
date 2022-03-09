@@ -113,34 +113,22 @@ public class GameManager : MonoBehaviour
         player.transform.Find("Arrow").gameObject.SetActive(key == myPlayerKey);
         var playerController = player.GetComponent<PlayerController>();
         playerController.playerSchema = playerSchema;
-        
 
-        playerSchema.OnChange += (changes) =>
-        {
-            changes.ForEach((obj) =>
-            {
-                Debug.Log(obj.Field);
-                Debug.Log(obj.Value);
-                Debug.Log(obj.PreviousValue);
-            });
-        };
-        playerSchema.position.OnChange += (changes) =>
-        {
-            changes.ForEach((obj) =>
-            {
-                switch(obj.Field) 
-                {
-                case "x":
-                    playerController.playerSchema.position.x = (float)obj.Value;
-                    break;
-                case "y":
-                    playerController.playerSchema.position.y = (float)obj.Value;
-                    break;
-                default:
-                    break;
-                }
-            });
-        };
+        playerSchema.OnChange(() => {
+            Debug.Log(playerSchema);
+            playerController.playerSchema = playerSchema;
+        });
+
+        playerSchema.OnIsReadyChange((current, previous) => {
+            Debug.Log("ON IS READY CHANGE");
+            Debug.Log(current);
+        });
+        /*
+        playerSchema.position.OnChange(() => {
+            Debug.Log("POSTITION CHANGE");
+            Debug.Log(playerSchema.position.x);
+        });
+        */
     }
     internal void OnPlayerChange(string key, PlayerSchema playerSchema)
     {
