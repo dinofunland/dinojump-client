@@ -37,9 +37,11 @@ public class PlayerController : MonoBehaviour
             Vector2 desiredPostion = new Vector3(playerSchema.position.x, playerSchema.position.y);
             transform.position = Vector2.Lerp(transform.position, desiredPostion, t);
         }
+
         return;
-        // TODO
         SetPlayerSkin();
+
+        
     }
 
     private void SetPlayerSkin()
