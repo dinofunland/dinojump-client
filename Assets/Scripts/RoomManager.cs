@@ -67,4 +67,10 @@ public class RoomManager : MonoBehaviour
             // Update PlayerObject in scene with key
         });
     }
+
+    private async void OnApplicationQuit()
+    {
+        Debug.Log("Leave");
+        await colyseusRoom.Leave();
+    }
 }
