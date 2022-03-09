@@ -21,8 +21,10 @@ public class LobbyUIHandler : MonoBehaviour
     {
         if(RoomManager.Instance?.colyseusRoom != null)
         {
-            //TODO: Doesnt do nothing
             await RoomManager.Instance.colyseusRoom.Send("ready");
+            readyButton.AddToClassList("is-ready-button");
+            readyButton.text = "Ready!";
+            readyButton.SetEnabled(false);
         }
     }
 

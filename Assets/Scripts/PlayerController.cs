@@ -20,10 +20,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     AnimatorOverrideController purpleAnim;
 
+    private DinoPicker.DinoSkin currentSkin;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        currentSkin = DinoPicker.DinoSkin.Blue;
         playerAnimator = GetComponent<Animator>();
 
     }
@@ -39,17 +42,19 @@ public class PlayerController : MonoBehaviour
             Vector2 desiredPostion = new Vector3(playerSchema.position.x, playerSchema.position.y);
             transform.position = Vector2.Lerp(transform.position, desiredPostion, t);
         }
-
-        SetPlayerSkin();
-
-        
+        if (playerSchema?.skin != (int)currentSkin)
+        {
+            Debug.Log("NewSkin received from Server.");
+            SetPlayerSkin();
+        }
     }
 
     private void SetPlayerSkin()
     {
         //TODO: Change Player Sprite & Animator
-        DinoPicker.DinoSkin current = (DinoPicker.DinoSkin)playerSchema.skin;
-        switch (current)
+        DinoPicker.DinoSkin newSkin = (DinoPicker.DinoSkin)playerSchema?.skin;
+        currentSkin = newSkin;
+        switch (newSkin)
         {
             default:
                 playerAnimator.runtimeAnimatorController = blueAnim;

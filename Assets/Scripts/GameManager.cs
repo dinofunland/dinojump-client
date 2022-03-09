@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -67,6 +68,48 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
     }
+
+    internal void OnGameStepChange(string currentValue, string previousValue)
+    {
+        switch (currentValue)
+        {
+            default:
+                //ShowLobbyUI
+                GameObject.Find("LobbyUI").SetActive(false);
+                break;
+            case "Starting":
+                GameObject.Find("CountdownUI").SetActive(true);
+                StartCoroutine("CountDown");
+                    break;
+            case "Ongoing":
+                //Hide Countdown
+                break;
+            case "Ended":
+                //Show Scoreboard
+                break;
+
+
+        }
+    }
+
+    IEnumerator CountDown()
+    {
+        int i = 0;
+        while (i < 5)
+        {
+            var countdownValue = 5 - i;
+            var text = GameObject.Find("CountdownUI").GetComponent<UIDocument>().rootVisualElement.Q<Label>("countdown-text");
+            text.text = countdownValue.ToString();
+            i++;
+            yield return new WaitForSeconds(1);
+            
+            GameObject.Find("CountdownUI").SetActive(false);
+        }
+        
+        
+    }
+
+    
 
     internal void OnPlatformAdd(string key, PlatformSchema value)
     {
@@ -149,6 +192,14 @@ public class GameManager : MonoBehaviour
         {
             lobbyUIHandler.RenderPlayerNames();
         }
+    }
+
+    enum GameStep
+    {
+        LOBBY = 0,
+        STARTING = 1,
+        ONGOING = 2,
+        ENDED = 3
     }
 
     #endregion
