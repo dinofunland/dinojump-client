@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GameObject playerPrefab;
 
-    public Dictionary<string, PlayerSchema> playerList;
+    public Dictionary<string, PlayerSchema> playerList = new Dictionary<string, PlayerSchema>();
 
     public string myPlayerKey;
     // Start is called before the first frame update
