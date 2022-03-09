@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float SpeedLerp = .085f;
     public PlayerSchema playerSchema;
     [SerializeField] public string playerKey;
 
@@ -22,13 +23,20 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         playerKey = playerSchema?.sessionId;
+
+        if (playerSchema?.position != null)
+        {
+            var t = Time.deltaTime / SpeedLerp;
+            Vector2 desiredPostion = new Vector3(playerSchema.position.x, playerSchema.position.y);
+            transform.position = Vector2.Lerp(transform.position, desiredPostion, t);
+        }
         return;
         // TODO
         SetPlayerSkin();

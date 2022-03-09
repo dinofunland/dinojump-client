@@ -109,12 +109,42 @@ public class GameManager : MonoBehaviour
 
         playerList.Add(key, playerSchema);
         RefreshLobbyUI();
-        var newPlayer = Instantiate(playerPrefab);
-        newPlayer.transform.Find("Arrow").gameObject.SetActive(key == myPlayerKey);
-        newPlayer.GetComponent<PlayerController>().playerSchema = playerSchema;
+        var player = Instantiate(playerPrefab);
+        player.transform.Find("Arrow").gameObject.SetActive(key == myPlayerKey);
+        var playerController = player.GetComponent<PlayerController>();
+        playerController.playerSchema = playerSchema;
+        
+
+        playerSchema.OnChange += (changes) =>
+        {
+            changes.ForEach((obj) =>
+            {
+                Debug.Log(obj.Field);
+                Debug.Log(obj.Value);
+                Debug.Log(obj.PreviousValue);
+            });
+        };
+        playerSchema.position.OnChange += (changes) =>
+        {
+            changes.ForEach((obj) =>
+            {
+                switch(obj.Field) 
+                {
+                case "x":
+                    playerController.playerSchema.position.x = (float)obj.Value;
+                    break;
+                case "y":
+                    playerController.playerSchema.position.y = (float)obj.Value;
+                    break;
+                default:
+                    break;
+                }
+            });
+        };
     }
     internal void OnPlayerChange(string key, PlayerSchema playerSchema)
     {
+        Debug.Log("player change");
         playerList[key] = playerSchema;
         lobbyUIHandler.RenderPlayerNames();
     }
