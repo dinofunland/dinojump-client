@@ -117,6 +117,11 @@ public class GameManager : MonoBehaviour
             Debug.Log("ON IS READY CHANGE");
             Debug.Log(current);
         });
+
+        playerSchema.position.OnChange(() => {
+            Debug.Log("POSTITION CHANGE");
+            Debug.Log(playerSchema.position.x);
+        });
     }
     internal void OnPlayerChange(string key, PlayerSchema playerSchema)
     {
