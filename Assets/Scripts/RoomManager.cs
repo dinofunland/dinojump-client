@@ -23,8 +23,8 @@ public class RoomManager : MonoBehaviour
 
         Instance = this;
         
-        colyseusClient = new ColyseusClient("wss://dinojump-server.herokuapp.com");
-         //colyseusClient = new ColyseusClient("ws://localhost:3002");
+        //colyseusClient = new ColyseusClient("wss://dinojump-server.herokuapp.com");
+        colyseusClient = new ColyseusClient("ws://localhost:3002");
     }
 
     // Update is called once per frame
@@ -46,10 +46,14 @@ public class RoomManager : MonoBehaviour
         
         colyseusRoom.State.players.OnAdd(GameManager.Instance.OnPlayerAdd);
         colyseusRoom.State.players.OnRemove(GameManager.Instance.OnPlayerRemove);
-        colyseusRoom.State.players.OnChange(GameManager.Instance.OnPlayerChange);
+        //colyseusRoom.State.players.OnChange(GameManager.Instance.OnPlayerChange);
+
+        // TODO handle platforms
+        /*
         colyseusRoom.State.platforms.OnAdd(GameManager.Instance.OnPlatformAdd);
         colyseusRoom.State.platforms.OnChange(GameManager.Instance.OnPlatformChange);
         colyseusRoom.State.platforms.OnRemove(GameManager.Instance.OnPlatformRemove);
+        */
 
         GameManager.Instance.myPlayerKey = colyseusRoom.SessionId;
     }

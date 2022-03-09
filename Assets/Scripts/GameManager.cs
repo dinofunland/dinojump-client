@@ -113,6 +113,10 @@ public class GameManager : MonoBehaviour
         newPlayer.transform.Find("Arrow").gameObject.SetActive(key == myPlayerKey);
         newPlayer.GetComponent<PlayerController>().playerSchema = playerSchema;
 
+        playerSchema.OnIsReadyChange((current, previous) => {
+            Debug.Log("ON IS READY CHANGE");
+            Debug.Log(current);
+        });
     }
     internal void OnPlayerChange(string key, PlayerSchema playerSchema)
     {
