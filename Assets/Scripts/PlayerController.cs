@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float SpeedLerp = .085f;
+    public float SpeedLerp = .02f;
     public PlayerSchema playerSchema;
     [SerializeField] public string playerKey;
 
