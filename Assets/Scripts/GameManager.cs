@@ -32,23 +32,23 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
         }
 
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     //Create New
-    public async void EnterLobby(string  playerName)
+    public async void EnterLobby(string playerName)
     {
         SceneManager.UnloadSceneAsync("Menu");
         StartCoroutine(AwaitGameScene());
 
         await RoomManager.Instance.ConnectLobby(playerName);
-        
+
         lobbyUIHandler = GameObject.Find("LobbyUI").GetComponent<LobbyUIHandler>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     internal void OnPlatformChange(string key, PlatformSchema value)
     {
-        spawnManager.UpdatePlatform(key,value);
+        spawnManager.UpdatePlatform(key, value);
     }
 
     internal void OnPlatformRemove(string key, PlatformSchema value)
@@ -112,7 +112,6 @@ public class GameManager : MonoBehaviour
         var newPlayer = Instantiate(playerPrefab);
         newPlayer.transform.Find("Arrow").gameObject.SetActive(key == myPlayerKey);
         newPlayer.GetComponent<PlayerController>().playerSchema = playerSchema;
-
     }
     internal void OnPlayerChange(string key, PlayerSchema playerSchema)
     {
