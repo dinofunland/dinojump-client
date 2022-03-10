@@ -10,6 +10,8 @@ public class RoomManager : MonoBehaviour
     private ColyseusClient colyseusClient;
     public ColyseusRoom<GameSchema> colyseusRoom;
 
+    private bool IsConnecting = false;
+
     public static RoomManager Instance;
  
     // Start is called before the first frame update
@@ -35,6 +37,9 @@ public class RoomManager : MonoBehaviour
 
     public async Task ConnectLobby(string playerName, string code = null)
     {
+        if(IsConnecting) return;
+
+        IsConnecting = true;
         Dictionary<string, object> roomOptions = new Dictionary<string, object>
         {
             ["name"] = playerName,
@@ -72,5 +77,6 @@ public class RoomManager : MonoBehaviour
     {
         Debug.Log("Leave");
         await colyseusRoom.Leave();
+        IsConnecting = false;
     }
 }
