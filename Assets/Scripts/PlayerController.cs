@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     AnimatorOverrideController purpleAnim;
 
     private DinoPicker.DinoSkin currentSkin;
+    private AnimationState currentAnimation;
+    private bool currentLeft;
+    private bool currentRight;
 
 
     // Start is called before the first frame update
@@ -45,35 +48,41 @@ public class PlayerController : MonoBehaviour
         {
             SetPlayerSkin();
         }
-
-        return;
-
-        SetAnimationState();
-       
+        if ((AnimationState)playerSchema?.animation != currentAnimation || playerSchema?.input.left != currentLeft || playerSchema?.input.right != currentRight)
+        {
+            SetAnimationState();
+        }
     }
 
     private void SetAnimationState()
     {
-        //TODO: implement on server / in playerschema
-        //AnimationState newAnim = (AnimationState)playerSchema?.AnimationState;
-        //switch (newAnim)
-        //{
-        //    default:
-        //        SetIdleAnimation();
-        //        break;
-        //    case AnimationState.Walking:
-        //        SetWalkAnimation(playerSchema.input.left);
-        //        break;
-        //    case AnimationState.Jumping:
-        //        SetJumpAnimation();
-        //        break;
-        //    case AnimationState.Falling:
-        //          SetFallingAnimation();
-        //        break;
-        //    case AnimationState.Dancing:
-        //          SetDanceAnimation();
-        //        break;
-        //}
+        Debug.Log("AnimationState: " + playerSchema?.animation);
+        Debug.Log("Left: " + playerSchema?.input.left + " Right: " + playerSchema?.input.right);
+        currentAnimation = (AnimationState)playerSchema?.animation;
+        if (playerSchema.input.left || playerSchema.input.right)
+        {
+            currentLeft = playerSchema.input.left;
+            currentRight = playerSchema.input.right;
+        }
+
+        switch (currentAnimation)
+        {
+            default:
+                SetIdleAnimation(currentLeft);
+                break;
+            case AnimationState.Walking:
+                SetWalkAnimation(currentLeft);
+                break;
+            case AnimationState.Jumping:
+                SetJumpAnimation(currentLeft);
+                break;
+            case AnimationState.Falling:
+                SetFallingAnimation(currentLeft);
+                break;
+            case AnimationState.Dancing:
+                SetDanceAnimation(currentLeft);
+                break;
+        }
     }
 
     private void SetPlayerSkin()
@@ -101,47 +110,52 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimator.SetBool("isJumping", false);
         playerAnimator.SetBool("isWalking", true);
-        gameObject.GetComponent<SpriteRenderer>().flipY = toLeft;
+        playerAnimator.SetBool("isFalling", false);
+        playerAnimator.SetBool("isDancing", false);
+        gameObject.GetComponent<SpriteRenderer>().flipX = !toLeft;
     }
-    private void SetJumpAnimation()
+    private void SetJumpAnimation(bool toLeft)
     {
         playerAnimator.SetBool("isWalking", false);
         playerAnimator.SetBool("isJumping", true);
         playerAnimator.SetBool("isFalling", false);
         playerAnimator.SetBool("isDancing", false);
+        gameObject.GetComponent<SpriteRenderer>().flipX = !toLeft;
     }
-    private void SetIdleAnimation()
+    private void SetIdleAnimation(bool toLeft)
     {
         playerAnimator.SetBool("isWalking", false);
         playerAnimator.SetBool("isJumping", false);
         playerAnimator.SetBool("isFalling", false);
         playerAnimator.SetBool("isDancing", false);
+        gameObject.GetComponent<SpriteRenderer>().flipX = !toLeft;
     }
-    private void SetFallingAnimation()
+    private void SetFallingAnimation(bool toLeft)
     {
         return;
         playerAnimator.SetBool("isWalking", false);
         playerAnimator.SetBool("isJumping", false);
         playerAnimator.SetBool("isFalling", true);
         playerAnimator.SetBool("isDancing", false);
+        gameObject.GetComponent<SpriteRenderer>().flipX = !toLeft;
     }
-    private void SetDanceAnimation()
+    private void SetDanceAnimation(bool toLeft)
     {
         return;
         playerAnimator.SetBool("isWalking", false);
         playerAnimator.SetBool("isJumping", false);
         playerAnimator.SetBool("isFalling", false);
         playerAnimator.SetBool("isDancing", true);
-
+        gameObject.GetComponent<SpriteRenderer>().flipX = !toLeft;
     }
 
     enum AnimationState
     { 
-        Idle = 1,
-        Walking = 2,
-        Jumping = 3,
-        Falling = 4,
-        Dancing = 5
+        Idle = 0,
+        Walking = 1,
+        Jumping = 2,
+        Falling = 3,
+        Dancing = 4
     }
 
     private void OnDrawGizmos()
