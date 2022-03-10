@@ -18,4 +18,11 @@ public class PlatformBase : MonoBehaviour
     {
         
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Vector3 size = new Vector3(PlatformSchema.size.width, PlatformSchema.size.height);
+        Gizmos.DrawWireCube(this.gameObject.transform.position, size);
+    }
 }

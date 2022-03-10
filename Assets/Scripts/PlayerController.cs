@@ -143,4 +143,11 @@ public class PlayerController : MonoBehaviour
         Falling = 4,
         Dancing = 5
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Vector3 size = new Vector3(playerSchema.size.width, playerSchema.size.height);
+        Gizmos.DrawWireCube(this.gameObject.transform.position, size);
+    }
 }
