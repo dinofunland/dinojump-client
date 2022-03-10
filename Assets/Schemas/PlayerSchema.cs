@@ -28,11 +28,11 @@ namespace Dinojump.Schemas {
 		[Type(5, "ref", typeof(InputSchema))]
 		public InputSchema input = new InputSchema();
 
-		[Type(6, "number")]
-		public float skin = default(float);
+		[Type(6, "uint16")]
+		public ushort skin = default(ushort);
 
-		[Type(7, "number")]
-		public float animation = default(float);
+		[Type(7, "uint16")]
+		public ushort animation = default(ushort);
 
 		/*
 		 * Support for individual property change callbacks below...
@@ -104,8 +104,8 @@ namespace Dinojump.Schemas {
 			};
 		}
 
-		protected event PropertyChangeHandler<float> _skinChange;
-		public Action OnSkinChange(PropertyChangeHandler<float> handler) {
+		protected event PropertyChangeHandler<ushort> _skinChange;
+		public Action OnSkinChange(PropertyChangeHandler<ushort> handler) {
 			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
 			__callbacks.AddPropertyCallback(nameof(skin));
 			_skinChange += handler;
@@ -115,8 +115,8 @@ namespace Dinojump.Schemas {
 			};
 		}
 
-		protected event PropertyChangeHandler<float> _animationChange;
-		public Action OnAnimationChange(PropertyChangeHandler<float> handler) {
+		protected event PropertyChangeHandler<ushort> _animationChange;
+		public Action OnAnimationChange(PropertyChangeHandler<ushort> handler) {
 			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
 			__callbacks.AddPropertyCallback(nameof(animation));
 			_animationChange += handler;
@@ -134,8 +134,8 @@ namespace Dinojump.Schemas {
 				case nameof(position): _positionChange?.Invoke((PositionSchema) change.Value, (PositionSchema) change.PreviousValue); break;
 				case nameof(size): _sizeChange?.Invoke((SizeSchema) change.Value, (SizeSchema) change.PreviousValue); break;
 				case nameof(input): _inputChange?.Invoke((InputSchema) change.Value, (InputSchema) change.PreviousValue); break;
-				case nameof(skin): _skinChange?.Invoke((float) change.Value, (float) change.PreviousValue); break;
-				case nameof(animation): _animationChange?.Invoke((float) change.Value, (float) change.PreviousValue); break;
+				case nameof(skin): _skinChange?.Invoke((ushort) change.Value, (ushort) change.PreviousValue); break;
+				case nameof(animation): _animationChange?.Invoke((ushort) change.Value, (ushort) change.PreviousValue); break;
 				default: break;
 			}
 		}
