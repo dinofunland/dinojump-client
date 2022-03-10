@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
     {
         currentSkin = DinoPicker.DinoSkin.Blue;
         playerAnimator = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame
@@ -44,14 +43,28 @@ public class PlayerController : MonoBehaviour
         }
         if (playerSchema?.skin != (int)currentSkin)
         {
-            Debug.Log("NewSkin received from Server.");
             SetPlayerSkin();
         }
+
+        return;
+        SetJumpAnimation();
+        //TODO: implement on server / in playerschema
+        //switch (playerSchema.AnimationState)
+        //{
+        //    default:
+        //        SetIdleAnimation();
+        //        break;
+        //    case AnimationState.Walking:
+        //        SetWalkAnimation(playerSchema.facingLeft);
+        //        break;
+        //    case AnimationState.Jumping:
+        //        SetJumpAnimation();
+        //        break;
+        //}
     }
 
     private void SetPlayerSkin()
     {
-        //TODO: Change Player Sprite & Animator
         DinoPicker.DinoSkin newSkin = (DinoPicker.DinoSkin)playerSchema?.skin;
         currentSkin = newSkin;
         switch (newSkin)
@@ -69,5 +82,29 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.runtimeAnimatorController = purpleAnim;
                 break;
         }
+    }
+
+    private void SetWalkAnimation(bool toLeft)
+    {
+        playerAnimator.SetBool("isJumping", false);
+        playerAnimator.SetBool("isWalking", true);
+        gameObject.GetComponent<SpriteRenderer>().flipY = toLeft;
+    }
+    private void SetJumpAnimation()
+    {
+        playerAnimator.SetBool("isWalking", false);
+        playerAnimator.SetBool("isJumping", true);
+    }
+    private void SetIdleAnimation()
+    {
+        playerAnimator.SetBool("isWalking", false);
+        playerAnimator.SetBool("isJumping", false);
+    }
+
+    enum AnimationState
+    { 
+        Idle = 1,
+        Walking = 2,
+        Jumping = 3
     }
 }

@@ -29,12 +29,6 @@ public class RoomManager : MonoBehaviour
         // colyseusClient = NetworkManager.Instance.CreateClient("ws://" + "localhost:3002");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public async Task ConnectLobby(string playerName, string code = null)
     {
         if(IsConnecting) return;

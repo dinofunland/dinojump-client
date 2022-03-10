@@ -14,8 +14,6 @@ public class InputManager : MonoBehaviour
 
     }
 
-
-
     // Update is called once per frame
     void Update()
     {
@@ -24,7 +22,7 @@ public class InputManager : MonoBehaviour
         if (hasHorizontalInputChanged)
         {
             horizontalInput = newHorizontalInput;
-            SendPLayerMovement();
+            SendPlayerMovement();
         }
 
         var newJumpInput = Input.GetButton("Jump");
@@ -41,7 +39,7 @@ public class InputManager : MonoBehaviour
         modulationInput = Input.GetButton("Fire3");
     }
 
-    async void SendPLayerMovement()
+    async void SendPlayerMovement()
     {
         if (RoomManager.Instance?.colyseusRoom != null)
         {
