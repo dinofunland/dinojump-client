@@ -47,18 +47,31 @@ public class PlayerController : MonoBehaviour
         }
 
         return;
-        SetJumpAnimation();
+
+        SetAnimationState();
+       
+    }
+
+    private void SetAnimationState()
+    {
         //TODO: implement on server / in playerschema
-        //switch (playerSchema.AnimationState)
+        //AnimationState newAnim = (AnimationState)playerSchema?.AnimationState;
+        //switch (newAnim)
         //{
         //    default:
         //        SetIdleAnimation();
         //        break;
         //    case AnimationState.Walking:
-        //        SetWalkAnimation(playerSchema.facingLeft);
+        //        SetWalkAnimation(playerSchema.input.left);
         //        break;
         //    case AnimationState.Jumping:
         //        SetJumpAnimation();
+        //        break;
+        //    case AnimationState.Falling:
+        //          SetFallingAnimation();
+        //        break;
+        //    case AnimationState.Dancing:
+        //          SetDanceAnimation();
         //        break;
         //}
     }
@@ -94,17 +107,40 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimator.SetBool("isWalking", false);
         playerAnimator.SetBool("isJumping", true);
+        playerAnimator.SetBool("isFalling", false);
+        playerAnimator.SetBool("isDancing", false);
     }
     private void SetIdleAnimation()
     {
         playerAnimator.SetBool("isWalking", false);
         playerAnimator.SetBool("isJumping", false);
+        playerAnimator.SetBool("isFalling", false);
+        playerAnimator.SetBool("isDancing", false);
+    }
+    private void SetFallingAnimation()
+    {
+        return;
+        playerAnimator.SetBool("isWalking", false);
+        playerAnimator.SetBool("isJumping", false);
+        playerAnimator.SetBool("isFalling", true);
+        playerAnimator.SetBool("isDancing", false);
+    }
+    private void SetDanceAnimation()
+    {
+        return;
+        playerAnimator.SetBool("isWalking", false);
+        playerAnimator.SetBool("isJumping", false);
+        playerAnimator.SetBool("isFalling", false);
+        playerAnimator.SetBool("isDancing", true);
+
     }
 
     enum AnimationState
     { 
         Idle = 1,
         Walking = 2,
-        Jumping = 3
+        Jumping = 3,
+        Falling = 4,
+        Dancing = 5
     }
 }
