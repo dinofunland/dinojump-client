@@ -201,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 488220963}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -300,4 +300,4 @@ MonoBehaviour:
   - {fileID: 951714698920710899, guid: f014309cfb577e7408d0e54540cc3a1a, type: 3}
   - {fileID: 8157640627964921600, guid: e56a773e88b80944ebbd5dd8ae1b7655, type: 3}
   - {fileID: 8157640627964921600, guid: e91c8e7e8c1d2d44993a51b280005944, type: 3}
-  speed: 0
+  lerpSpeed: 0
