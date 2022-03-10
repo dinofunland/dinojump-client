@@ -31,8 +31,8 @@ namespace Dinojump.Schemas {
 		[Type(6, "number")]
 		public float skin = default(float);
 
-		[Type(7, "string")]
-		public string animation = default(string);
+		[Type(7, "number")]
+		public float animation = default(float);
 
 		/*
 		 * Support for individual property change callbacks below...
@@ -115,8 +115,8 @@ namespace Dinojump.Schemas {
 			};
 		}
 
-		protected event PropertyChangeHandler<string> _animationChange;
-		public Action OnAnimationChange(PropertyChangeHandler<string> handler) {
+		protected event PropertyChangeHandler<float> _animationChange;
+		public Action OnAnimationChange(PropertyChangeHandler<float> handler) {
 			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
 			__callbacks.AddPropertyCallback(nameof(animation));
 			_animationChange += handler;
@@ -135,7 +135,7 @@ namespace Dinojump.Schemas {
 				case nameof(size): _sizeChange?.Invoke((SizeSchema) change.Value, (SizeSchema) change.PreviousValue); break;
 				case nameof(input): _inputChange?.Invoke((InputSchema) change.Value, (InputSchema) change.PreviousValue); break;
 				case nameof(skin): _skinChange?.Invoke((float) change.Value, (float) change.PreviousValue); break;
-				case nameof(animation): _animationChange?.Invoke((string) change.Value, (string) change.PreviousValue); break;
+				case nameof(animation): _animationChange?.Invoke((float) change.Value, (float) change.PreviousValue); break;
 				default: break;
 			}
 		}
