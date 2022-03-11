@@ -70,7 +70,7 @@ public class RoomManager : MonoBehaviour
     private async void OnApplicationQuit()
     {
         Debug.Log("Leave");
-        await colyseusRoom.Leave();
+        await colyseusRoom?.Leave();
         IsConnecting = false;
     }
 }
