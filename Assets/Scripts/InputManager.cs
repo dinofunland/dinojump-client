@@ -17,7 +17,7 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var newHorizontalInput = Input.GetAxis("Horizontal");
+        var newHorizontalInput = Input.GetAxisRaw("Horizontal");
         var hasHorizontalInputChanged = newHorizontalInput != horizontalInput;
         if (hasHorizontalInputChanged)
         {
