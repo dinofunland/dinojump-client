@@ -32,9 +32,10 @@ public class LavaController : MonoBehaviour
     {
         if (floorSchema != null)
         {
-            Gizmos.color = Color.green;
-            Vector3 size = new Vector3(floorSchema.size.width, floorSchema.size.height);
-            Gizmos.DrawWireCube(new Vector2(floorSchema.position.x, floorSchema.position.y), size);
+            Gizmos.color = Color.red;
+            Vector3 left = new Vector3(-500, floorSchema.position.y);
+            Vector3 right = new Vector3(500, floorSchema.position.y);
+            Gizmos.DrawLine(left, right);
         }
     }
 }
