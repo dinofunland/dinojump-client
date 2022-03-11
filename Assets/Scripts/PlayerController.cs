@@ -56,8 +56,8 @@ public class PlayerController : MonoBehaviour
 
     private void SetAnimationState()
     {
-        Debug.Log("AnimationState: " + playerSchema?.animation);
-        Debug.Log("Left: " + playerSchema?.input.left + " Right: " + playerSchema?.input.right);
+        //Debug.Log("AnimationState: " + playerSchema?.animation);
+        //Debug.Log("Left: " + playerSchema?.input.left + " Right: " + playerSchema?.input.right);
         currentAnimation = (AnimationState)playerSchema?.animation;
         if (playerSchema.input.left || playerSchema.input.right)
         {
@@ -132,6 +132,7 @@ public class PlayerController : MonoBehaviour
     }
     private void SetFallingAnimation(bool toLeft)
     {
+        //TODO: Create Sprites, Animation and add to AnimatorController
         return;
         playerAnimator.SetBool("isWalking", false);
         playerAnimator.SetBool("isJumping", false);
@@ -141,6 +142,7 @@ public class PlayerController : MonoBehaviour
     }
     private void SetDanceAnimation(bool toLeft)
     {
+        //TODO: Create Sprites, Animation and add to AnimatorController
         return;
         playerAnimator.SetBool("isWalking", false);
         playerAnimator.SetBool("isJumping", false);

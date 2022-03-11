@@ -1,3 +1,4 @@
+using Colyseus.Schema;
 using Dinojump.Schemas;
 using System;
 using System.Collections;
@@ -41,6 +42,46 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnFloorPasdositionChange(string key, FloorSchema floorSchema)
+    {
+    }
+
+    internal void OnFloorPositionChange(FloorSchema currentValue, FloorSchema previousValue)
+    {
+        Debug.Log("Floor Schema changed.");
+        var lavaObject = GameObject.Find("LavaContainer").GetComponent<LavaController>();
+        lavaObject.floorSchema = currentValue;
+    }
+
+    #region LobbyHandling
+
+    //Join Lobby
+    public async void ConnectToLobby(string playerName, string code)
+    {
+        await RoomManager.Instance.ConnectLobby(playerName, code);
+        SceneManager.UnloadSceneAsync("Menu");
+        StartCoroutine(AwaitGameScene());
+    }
+
+    //Create New
+    public async void ConnectToLobby(string playerName)
+    {
+        await RoomManager.Instance.ConnectLobby(playerName);
+        SceneManager.UnloadSceneAsync("Menu");
+        StartCoroutine(AwaitGameScene());
+    }
+
+    void PrepareLobby()
+    {
+        lobbyUI.SetActive(true);
+        lobbyUIHandler = lobbyUI.GetComponent<LobbyUIHandler>();
+
+        if (RoomManager.Instance.colyseusRoom != null)
+        {
+            lobbyUIHandler.SetLobbyCode(RoomManager.Instance.colyseusRoom.RoomId);
+        }
+    }
+
     IEnumerator AwaitGameScene()
     {
         var sceneLoad = SceneManager.LoadSceneAsync("Game", LoadSceneMode.Additive);
@@ -76,6 +117,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ExitGame()
+    {
+        SceneManager.LoadScene("Main");
+    }
+
     IEnumerator CountDown()
     {
         var countDownLabel = countdownUI.GetComponent<UIDocument>().rootVisualElement.Q<Label>("countdown-text");
@@ -91,7 +137,9 @@ public class GameManager : MonoBehaviour
         countDownLabel.text = "Go!";
     }
 
-    
+    #endregion
+
+    #region PlatformListeners
 
     internal void OnPlatformAdd(string key, PlatformSchema value)
     {
@@ -108,37 +156,7 @@ public class GameManager : MonoBehaviour
         spawnManager.RemovePlatform(key);
     }
 
-    //Join Lobby
-    public async void ConnectToLobby(string playerName, string code)
-    {
-        await RoomManager.Instance.ConnectLobby(playerName, code);
-        SceneManager.UnloadSceneAsync("Menu");
-        StartCoroutine(AwaitGameScene());
-    }
-
-    //Create New
-    public async void ConnectToLobby(string playerName)
-    {
-        await RoomManager.Instance.ConnectLobby(playerName);
-        SceneManager.UnloadSceneAsync("Menu");
-        StartCoroutine(AwaitGameScene());
-    }
-
-    void PrepareLobby()
-    {
-        lobbyUI.SetActive(true);
-        lobbyUIHandler = lobbyUI.GetComponent<LobbyUIHandler>();       
-
-        if (RoomManager.Instance.colyseusRoom != null)
-        {
-            lobbyUIHandler.SetLobbyCode(RoomManager.Instance.colyseusRoom.RoomId);
-        }
-    }
-
-    public void ExitGame()
-    {
-        SceneManager.LoadScene("Main");
-    }
+    #endregion
 
     #region PlayerListeners
     public void OnPlayerAdd(string key, PlayerSchema playerSchema)
@@ -153,13 +171,13 @@ public class GameManager : MonoBehaviour
         playerController.playerSchema = playerSchema;
 
         playerSchema.OnChange(() => {
-            Debug.Log(playerSchema);
+            //Debug.Log(playerSchema);
             playerController.playerSchema = playerSchema;
         });
 
         playerSchema.OnIsReadyChange((current, previous) => {
-            Debug.Log("ON IS READY CHANGE");
-            Debug.Log(current);
+            //Debug.Log("ON IS READY CHANGE");
+            //Debug.Log(current);
         });
         /*
         playerSchema.position.OnChange(() => {

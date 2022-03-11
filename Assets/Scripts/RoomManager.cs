@@ -51,6 +51,8 @@ public class RoomManager : MonoBehaviour
         colyseusRoom.State.platforms.OnAdd(GameManager.Instance.OnPlatformAdd);
         colyseusRoom.State.platforms.OnChange(GameManager.Instance.OnPlatformChange);
         colyseusRoom.State.platforms.OnRemove(GameManager.Instance.OnPlatformRemove);
+
+        colyseusRoom.State.OnFloorChange(GameManager.Instance.OnFloorPositionChange);
         
         GameManager.Instance.myPlayerKey = colyseusRoom.SessionId;
     }
