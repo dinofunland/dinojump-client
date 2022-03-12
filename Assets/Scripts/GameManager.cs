@@ -61,17 +61,17 @@ public class GameManager : MonoBehaviour
     //Join Lobby
     public async void ConnectToLobby(string playerName, string code)
     {
-        await RoomManager.Instance.ConnectLobby(playerName, code);
         SceneManager.UnloadSceneAsync("Menu");
         StartCoroutine(AwaitGameScene());
+        await RoomManager.Instance.ConnectLobby(playerName, code);
     }
 
     //Create New
     public async void ConnectToLobby(string playerName)
     {
-        await RoomManager.Instance.ConnectLobby(playerName);
         SceneManager.UnloadSceneAsync("Menu");
         StartCoroutine(AwaitGameScene());
+        await RoomManager.Instance.ConnectLobby(playerName);
     }
 
     void PrepareLobby()
