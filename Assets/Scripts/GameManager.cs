@@ -42,9 +42,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnFloorPasdositionChange(string key, FloorSchema floorSchema)
+    void ConstructGroundAndWalls()
     {
+        return;
+        Debug.Log("TODO: Cosntruct Ground and Walls");
     }
+
 
     internal void OnFloorPositionChange(FloorSchema currentValue, FloorSchema previousValue)
     {

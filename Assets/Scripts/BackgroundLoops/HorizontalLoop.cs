@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LavaLoop : MonoBehaviour
+public class HorizontalLoop : MonoBehaviour
 {
     [SerializeField]
-    GameObject lavaContainer;
+    List<GameObject> obtjectsToLoop;
     private Camera mainCamera;
     private Vector2 screenBounds;
     public float choke;
@@ -17,12 +17,18 @@ public class LavaLoop : MonoBehaviour
     {
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
-        LoadFirstRow(lavaContainer);
+        foreach (var item in obtjectsToLoop)
+        {
+            LoadFirstRow(item);
+        }
     }
 
     private void LateUpdate()
     {
-        RepositionInsideRow(lavaContainer);
+        foreach (var item in obtjectsToLoop)
+        {
+            RepositionInsideRow(item);
+        }
     }
 
     private void RepositionInsideRow(GameObject obj)
@@ -57,7 +63,7 @@ public class LavaLoop : MonoBehaviour
             GameObject c = Instantiate(clone);
             c.transform.SetParent(container.transform);
             c.transform.position = new Vector3(objectWidth * i, container.transform.position.y, container.transform.position.z);
-            c.name = "LavaTile" + i;
+            c.name = clone.name + i;
             Destroy(c.GetComponent<LavaController>());
         }
         Destroy(clone);
