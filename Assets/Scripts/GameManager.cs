@@ -55,8 +55,10 @@ public class GameManager : MonoBehaviour
         var wallWidth = wallLeft.GetComponentInChildren<SpriteRenderer>().bounds.extents.x;
         var groundHeight = ground.GetComponentInChildren<SpriteRenderer>().bounds.extents.y - offset;
 
-        wallLeft.transform.position = new Vector2(-groundSchema.size.width - wallWidth, wallLeft.transform.position.y);
-        wallRight.transform.position = new Vector2(groundSchema.size.width + wallWidth, wallRight.transform.position.y);
+        var halfGroundWidth = groundSchema.size.width / 2;
+
+        wallLeft.transform.position = new Vector2(-halfGroundWidth - wallWidth, wallLeft.transform.position.y);
+        wallRight.transform.position = new Vector2(halfGroundWidth + wallWidth, wallRight.transform.position.y);
 
         ground.transform.position = new Vector2(groundSchema.position.x, groundSchema.position.y + groundHeight);
     }
