@@ -11,6 +11,8 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField]
     float lerpSpeed;
+
+    float platformYOffset = 1.2f;
     public void SpawnPlatform(string key, PlatformSchema platSchema)
     {
         //Debug.Log("SpawnManager.SpawnPlatform! Type: " + platSchema.type);
@@ -27,7 +29,7 @@ public class SpawnManager : MonoBehaviour
                 prefab = platformPrefabs.FirstOrDefault(p => p.name.Contains("Static")); 
                 break;
         }
-        var platform = Instantiate(prefab, new Vector2(platSchema.position.x,platSchema.position.y), prefab.transform.rotation);
+        var platform = Instantiate(prefab, new Vector2(platSchema.position.x,platSchema.position.y + platformYOffset), prefab.transform.rotation);
         platform.GetComponent<PlatformBase>().PlatformSchema = platSchema;
         platform.GetComponent<PlatformBase>().Key = key;
 

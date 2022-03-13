@@ -23,6 +23,6 @@ public class PlatformBase : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Vector3 size = new Vector3(PlatformSchema.size.width, PlatformSchema.size.height);
-        Gizmos.DrawWireCube(this.gameObject.transform.position, size);
+        Gizmos.DrawWireCube(new Vector3(PlatformSchema.position.x, PlatformSchema.position.y), size);
     }
 }
