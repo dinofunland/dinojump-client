@@ -134,8 +134,8 @@ public class GameManager : MonoBehaviour
                 countdownUI.SetActive(false);
                 break;
             case "Ended":
-                foreach (PlatformBase pb in FindObjectsOfType<PlatformBase>())
-                    Destroy(pb.gameObject);
+                //foreach (PlatformBase pb in FindObjectsOfType<PlatformBase>())
+                //    Destroy(pb.gameObject);
                 gameOverUI.SetActive(true);
                 break;
         }
