@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     void ConstructGroundAndWalls()
     {
         //TODO: Change WallSize on Server
-        float offset = 7.6f;
+        float offset = 5f;
 
         var groundSchema = RoomManager.Instance.colyseusRoom.State.ground;
 
@@ -53,14 +53,14 @@ public class GameManager : MonoBehaviour
         var wallRight = GameObject.Find("WallRight");
         var ground = GameObject.Find("Ground");
         var wallWidth = wallLeft.GetComponentInChildren<SpriteRenderer>().bounds.extents.x;
-        var groundHeight = ground.GetComponentInChildren<SpriteRenderer>().bounds.extents.y - offset;
+        var groundHeight = ground.GetComponentInChildren<SpriteRenderer>().bounds.extents.y + offset;
 
         var halfGroundWidth = groundSchema.size.width / 2;
 
         wallLeft.transform.position = new Vector2(-halfGroundWidth - wallWidth, wallLeft.transform.position.y);
         wallRight.transform.position = new Vector2(halfGroundWidth + wallWidth, wallRight.transform.position.y);
 
-        ground.transform.position = new Vector2(groundSchema.position.x, groundSchema.position.y + groundHeight);
+        ground.transform.position = new Vector2(groundSchema.position.x, groundSchema.position.y - groundHeight);
     }
 
 
