@@ -25,6 +25,9 @@ namespace Dinojump.Schemas {
 		[Type(4, "ref", typeof(FloorSchema))]
 		public FloorSchema floor = new FloorSchema();
 
+		[Type(5, "ref", typeof(GroundSchema))]
+		public GroundSchema ground = new GroundSchema();
+
 		/*
 		 * Support for individual property change callbacks below...
 		 */
@@ -84,6 +87,17 @@ namespace Dinojump.Schemas {
 			};
 		}
 
+		protected event PropertyChangeHandler<GroundSchema> _groundChange;
+		public Action OnGroundChange(PropertyChangeHandler<GroundSchema> handler) {
+			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
+			__callbacks.AddPropertyCallback(nameof(ground));
+			_groundChange += handler;
+			return () => {
+				__callbacks.RemovePropertyCallback(nameof(ground));
+				_groundChange -= handler;
+			};
+		}
+
 		protected override void TriggerFieldChange(DataChange change) {
 			switch (change.Field) {
 				case nameof(gameStep): _gameStepChange?.Invoke((string) change.Value, (string) change.PreviousValue); break;
@@ -91,6 +105,7 @@ namespace Dinojump.Schemas {
 				case nameof(players): _playersChange?.Invoke((MapSchema<PlayerSchema>) change.Value, (MapSchema<PlayerSchema>) change.PreviousValue); break;
 				case nameof(platforms): _platformsChange?.Invoke((MapSchema<PlatformSchema>) change.Value, (MapSchema<PlatformSchema>) change.PreviousValue); break;
 				case nameof(floor): _floorChange?.Invoke((FloorSchema) change.Value, (FloorSchema) change.PreviousValue); break;
+				case nameof(ground): _groundChange?.Invoke((GroundSchema) change.Value, (GroundSchema) change.PreviousValue); break;
 				default: break;
 			}
 		}
