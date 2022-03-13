@@ -28,6 +28,9 @@ namespace Dinojump.Schemas {
 		[Type(5, "ref", typeof(GroundSchema))]
 		public GroundSchema ground = new GroundSchema();
 
+		[Type(6, "number")]
+		public float score = default(float);
+
 		/*
 		 * Support for individual property change callbacks below...
 		 */
@@ -98,6 +101,17 @@ namespace Dinojump.Schemas {
 			};
 		}
 
+		protected event PropertyChangeHandler<float> _scoreChange;
+		public Action OnScoreChange(PropertyChangeHandler<float> handler) {
+			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
+			__callbacks.AddPropertyCallback(nameof(score));
+			_scoreChange += handler;
+			return () => {
+				__callbacks.RemovePropertyCallback(nameof(score));
+				_scoreChange -= handler;
+			};
+		}
+
 		protected override void TriggerFieldChange(DataChange change) {
 			switch (change.Field) {
 				case nameof(gameStep): _gameStepChange?.Invoke((string) change.Value, (string) change.PreviousValue); break;
@@ -106,6 +120,7 @@ namespace Dinojump.Schemas {
 				case nameof(platforms): _platformsChange?.Invoke((MapSchema<PlatformSchema>) change.Value, (MapSchema<PlatformSchema>) change.PreviousValue); break;
 				case nameof(floor): _floorChange?.Invoke((FloorSchema) change.Value, (FloorSchema) change.PreviousValue); break;
 				case nameof(ground): _groundChange?.Invoke((GroundSchema) change.Value, (GroundSchema) change.PreviousValue); break;
+				case nameof(score): _scoreChange?.Invoke((float) change.Value, (float) change.PreviousValue); break;
 				default: break;
 			}
 		}
