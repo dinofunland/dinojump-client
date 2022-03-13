@@ -44,8 +44,21 @@ public class GameManager : MonoBehaviour
 
     void ConstructGroundAndWalls()
     {
-        return;
-        Debug.Log("TODO: Cosntruct Ground and Walls");
+        //TODO: Change WallSize on Server
+        float offset = 7.6f;
+
+        var groundSchema = RoomManager.Instance.colyseusRoom.State.ground;
+
+        var wallLeft = GameObject.Find("WallLeft");
+        var wallRight = GameObject.Find("WallRight");
+        var ground = GameObject.Find("Ground");
+        var wallWidth = wallLeft.GetComponentInChildren<SpriteRenderer>().bounds.extents.x;
+        var groundHeight = ground.GetComponentInChildren<SpriteRenderer>().bounds.extents.y - offset;
+
+        wallLeft.transform.position = new Vector2(-groundSchema.size.width - wallWidth, wallLeft.transform.position.y);
+        wallRight.transform.position = new Vector2(groundSchema.size.width + wallWidth, wallRight.transform.position.y);
+
+        ground.transform.position = new Vector2(groundSchema.position.x, groundSchema.position.y + groundHeight);
     }
 
 
@@ -83,6 +96,8 @@ public class GameManager : MonoBehaviour
         {
             lobbyUIHandler.SetLobbyCode(RoomManager.Instance.colyseusRoom.RoomId);
         }
+
+        ConstructGroundAndWalls();
     }
 
     IEnumerator AwaitGameScene()
@@ -177,6 +192,7 @@ public class GameManager : MonoBehaviour
             //Debug.Log(playerSchema);
             playerController.playerSchema = playerSchema;
         });
+
 
         playerSchema.OnIsReadyChange((current, previous) => {
             //Debug.Log("ON IS READY CHANGE");

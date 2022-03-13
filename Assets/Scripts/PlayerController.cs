@@ -23,8 +23,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject lavaSplashAnimation;
 
+    public AudioSource jumpSound;
+
     private DinoPicker.DinoSkin currentSkin;
     private AnimationState currentAnimation;
+    private AnimationState previousAnimation;
     private bool currentLeft;
     private bool currentRight;
 
@@ -32,6 +35,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        jumpSound = GetComponent<AudioSource>();
         currentSkin = DinoPicker.DinoSkin.Blue;
         playerAnimator = GetComponent<Animator>();
     }
@@ -50,25 +54,32 @@ public class PlayerController : MonoBehaviour
         if (playerSchema?.skin != (int)currentSkin)
         {
             SetPlayerSkin();
+            
         }
         if ((AnimationState)playerSchema?.animation != currentAnimation || playerSchema?.input.left != currentLeft || playerSchema?.input.right != currentRight)
         {
             SetAnimationState();
+
         }
 
+        //TODO: Implement Event / State on Server
+        return;
         OnTouchLava();
+
     }
 
     private void OnTouchLava()
     {
+        Debug.Log(playerKey + " touched Lava.");
         //instantiate lava splash animation
-        Instantiate(lavaSplashAnimation, this.transform);
+        Instantiate(lavaSplashAnimation, transform.position, lavaSplashAnimation.transform.rotation);
     }
 
     private void SetAnimationState()
     {
         //Debug.Log("AnimationState: " + playerSchema?.animation);
         //Debug.Log("Left: " + playerSchema?.input.left + " Right: " + playerSchema?.input.right);
+        previousAnimation = this.currentAnimation;
         currentAnimation = (AnimationState)playerSchema?.animation;
         if (playerSchema.input.left || playerSchema.input.right)
         {
@@ -85,7 +96,11 @@ public class PlayerController : MonoBehaviour
                 SetWalkAnimation(currentLeft);
                 break;
             case AnimationState.Jumping:
-                SetJumpAnimation(currentLeft);
+                if (previousAnimation != AnimationState.Jumping)
+                {
+                    SetJumpAnimation(currentLeft);
+                    jumpSound.Play();
+                }
                 break;
             case AnimationState.Falling:
                 SetFallingAnimation(currentLeft);

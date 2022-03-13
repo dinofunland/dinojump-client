@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class LavaSplashController : MonoBehaviour
 {
-    Animator splashAnimator;
-    Animation splash;
+    public float offset;
+    public AudioSource dropSound;
     // Start is called before the first frame update
     void Start()
     {
-        splashAnimator = GetComponent<Animator>();
-        splashAnimator.fireEvents = true;
-        splashAnimator.Play("LavaSplash");
+        var newTransform = transform.position;
+        newTransform.y += offset;
+        this.transform.position = newTransform;
     }
-
     void OnAnimationEnd()
     {
         Destroy(gameObject);
