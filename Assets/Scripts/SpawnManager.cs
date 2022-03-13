@@ -25,6 +25,9 @@ public class SpawnManager : MonoBehaviour
             case "Moving":
                 prefab = platformPrefabs.FirstOrDefault(p => p.name.Contains("Moving"));
                 break;
+            case "Freezing":
+                prefab = platformPrefabs.FirstOrDefault(p => p.name.Contains("Freezing"));
+                break;
             default:
                 prefab = platformPrefabs.FirstOrDefault(p => p.name.Contains("Static")); 
                 break;
@@ -37,7 +40,12 @@ public class SpawnManager : MonoBehaviour
 
     public void RemovePlatform(string key)
     {
-        Destroy(FindObjectsOfType<PlatformBase>().FirstOrDefault(p => p.Key == key).gameObject);
+        var platform = FindObjectsOfType<PlatformBase>().FirstOrDefault(p => p.Key == key).gameObject;
+        Debug.Log("Called with Key: " + key + " Platform Key: " + platform.GetComponent<PlatformBase>().Key);
+        if (platform != null)
+        {
+            Destroy(platform);
+        }
     }
 
     enum PlatformType
@@ -50,7 +58,10 @@ public class SpawnManager : MonoBehaviour
     internal void UpdatePlatform(string key, PlatformSchema value)
     {
         var platform = FindObjectsOfType<PlatformBase>().FirstOrDefault(p => p.Key == key).gameObject;
-        Vector3.Lerp(platform.transform.position, new Vector2(value.position.x, value.position.y), Time.deltaTime * lerpSpeed);
-        platform.GetComponent<PlatformBase>().PlatformSchema = value;
+        if (platform != null)
+        {
+            Vector3.Lerp(platform.transform.position, new Vector2(value.position.x, value.position.y), Time.deltaTime * lerpSpeed);
+            platform.GetComponent<PlatformBase>().PlatformSchema = value;
+        }
     }
 }

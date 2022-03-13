@@ -90,7 +90,9 @@ public class GameManager : MonoBehaviour
     }
 
     void PrepareLobby()
-    {
+    {       
+        countdownUI.SetActive(false);
+        //Instantiate(lobbyUI);
         lobbyUI.SetActive(true);
         lobbyUIHandler = lobbyUI.GetComponent<LobbyUIHandler>();
 
@@ -132,6 +134,8 @@ public class GameManager : MonoBehaviour
                 countdownUI.SetActive(false);
                 break;
             case "Ended":
+                foreach (PlatformBase pb in FindObjectsOfType<PlatformBase>())
+                    Destroy(pb.gameObject);
                 gameOverUI.SetActive(true);
                 break;
         }
@@ -139,7 +143,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
 
     IEnumerator CountDown()

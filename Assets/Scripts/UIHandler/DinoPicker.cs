@@ -16,9 +16,8 @@ public class DinoPicker : MonoBehaviour
     Button btnPurple;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-
         var root = GetComponent<UIDocument>().rootVisualElement;
         dinoPicker = root.Q<VisualElement>("dinopicker");
 
@@ -30,32 +29,6 @@ public class DinoPicker : MonoBehaviour
         btnGreen.clicked += OnGreenDinoClicked;
         btnPurple = root.Q<Button>("purple");
         btnPurple.clicked += OnPurpleDinoClicked;
-        //int i = 0;
-        //foreach (var dino in dinoSprites)
-        //{
-        //    Button dinoButton = new Button();
-        //    dinoButton.style.backgroundImage = new StyleBackground{ };
-        //    dinoButton.AddToClassList("dino-option");
-        //    dinoButton.name = "Dino"+i.ToString();
-        //    dinoButton.clicked += (delegate { OnDinoClicked(i); });
-        //    dinoButton.visible = true;
-        //    dinoButton.SetEnabled(true);
-
-        //    switch (i)
-        //    {
-        //        default:
-        //            dinoButton.AddToClassList("blueDinoSprite");
-        //            break;
-        //        case (int)DinoSkin.Green:
-        //            dinoButton.AddToClassList("greenDinoSprite");
-        //            break;
-        //        case (int)DinoSkin.Yellow:
-        //            dinoButton.AddToClassList("yellowDinoSprite");
-        //            break;
-        //    }
-        //    dinoPicker.Add(dinoButton);
-        //    i++;
-        //}
     }
 
     private void OnBlueDinoClicked()
@@ -101,7 +74,6 @@ public class DinoPicker : MonoBehaviour
         btnPurple.AddToClassList("dino-option-active");
     }
 
-
     private async void SendSkinInfo()
     {
         if (RoomManager.Instance?.colyseusRoom != null)
@@ -112,11 +84,6 @@ public class DinoPicker : MonoBehaviour
         {
             Debug.LogError("No connection to Server.");
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public enum DinoSkin 

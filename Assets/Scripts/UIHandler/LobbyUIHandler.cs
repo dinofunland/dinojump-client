@@ -11,8 +11,14 @@ public class LobbyUIHandler : MonoBehaviour
     VisualElement playerContainer;
     Button readyButton;
 
+    Button btnBlue;
+    Button btnGreen;
+    Button btnPurp;
+    Button btnYellow;
+
+
     // Start is called before the first frame update
-    void Awake()
+    void OnEnable()
     {
         InitializeUI();
     }
@@ -27,6 +33,7 @@ public class LobbyUIHandler : MonoBehaviour
                 readyButton.AddToClassList("is-ready-button");
                 readyButton.text = "Ready!";
                 readyButton.SetEnabled(false);
+                //Destroy(gameObject);
             }
             catch 
             {
@@ -44,11 +51,14 @@ public class LobbyUIHandler : MonoBehaviour
         playerContainer = root.Q<VisualElement>("player-container");
         readyButton = root.Q<Button>("ready-button");
         readyButton.clicked += OnReady_Clicked;
+        readyButton.SetEnabled(true);
         playerContainer.Clear();
     }
 
     public void SetLobbyCode(string code)
     {
+        if (lobbyCode == null)
+            InitializeUI();
         lobbyCode.text = code;
     }
     public void RenderPlayerNames()
