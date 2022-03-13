@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     AnimatorOverrideController purpleAnim;
 
+    [SerializeField]
+    GameObject lavaSplashAnimation;
+
     private DinoPicker.DinoSkin currentSkin;
     private AnimationState currentAnimation;
     private bool currentLeft;
@@ -52,6 +55,14 @@ public class PlayerController : MonoBehaviour
         {
             SetAnimationState();
         }
+
+        OnTouchLava();
+    }
+
+    private void OnTouchLava()
+    {
+        //instantiate lava splash animation
+        Instantiate(lavaSplashAnimation, this.transform);
     }
 
     private void SetAnimationState()
