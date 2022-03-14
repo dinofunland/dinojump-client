@@ -2,6 +2,7 @@ using Dinojump.Schemas;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -66,25 +67,26 @@ public class LobbyUIHandler : MonoBehaviour
     {
         //clear and redraw list
         playerContainer.Clear();
+        
+        var newList = new Dictionary<string, PlayerSchema>();
         foreach (var player in GameManager.Instance.playerList)
         {
-            if (player.Value == null) 
+            if (player.Value != null)
             {
-                GameManager.Instance.playerList.Remove(player.Key);
-                continue;
-            }
+                var label = new Label(player.Value.username);
+                if (player.Value.isReady)
+                {
+                    label.AddToClassList("player-list-item-ready");
+                }
+                else
+                {
+                    label.AddToClassList("player-list-item");
+                }
 
-            var label = new Label(player.Value.username);
-            if (player.Value.isReady)
-            {
-                label.AddToClassList("player-list-item-ready");
+                playerContainer.Add(label);
+                newList.Add(player.Key, player.Value);
             }
-            else
-            {
-                label.AddToClassList("player-list-item");
-            }
-
-            playerContainer.Add(label);
         }
+        GameManager.Instance.playerList = newList;
     }
 }
