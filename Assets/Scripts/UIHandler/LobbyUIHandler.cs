@@ -68,6 +68,12 @@ public class LobbyUIHandler : MonoBehaviour
         playerContainer.Clear();
         foreach (var player in GameManager.Instance.playerList)
         {
+            if (player.Value == null) 
+            {
+                GameManager.Instance.playerList.Remove(player.Key);
+                continue;
+            }
+
             var label = new Label(player.Value.username);
             if (player.Value.isReady)
             {

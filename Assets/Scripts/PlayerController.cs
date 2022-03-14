@@ -77,8 +77,6 @@ public class PlayerController : MonoBehaviour
 
     private void SetAnimationState()
     {
-        //Debug.Log("AnimationState: " + playerSchema?.animation);
-        //Debug.Log("Left: " + playerSchema?.input.left + " Right: " + playerSchema?.input.right);
         previousAnimation = this.currentAnimation;
         currentAnimation = (AnimationState)playerSchema?.animation;
         if (playerSchema.input.left || playerSchema.input.right)
@@ -86,6 +84,8 @@ public class PlayerController : MonoBehaviour
             currentLeft = playerSchema.input.left;
             currentRight = playerSchema.input.right;
         }
+
+        gameObject.GetComponent<SpriteRenderer>().flipX = !currentLeft;
 
         switch (currentAnimation)
         {
@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("isWalking", true);
         playerAnimator.SetBool("isFalling", false);
         playerAnimator.SetBool("isDancing", false);
-        gameObject.GetComponent<SpriteRenderer>().flipX = !toLeft;
+        
     }
     private void SetJumpAnimation(bool toLeft)
     {
@@ -146,7 +146,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("isJumping", true);
         playerAnimator.SetBool("isFalling", false);
         playerAnimator.SetBool("isDancing", false);
-        gameObject.GetComponent<SpriteRenderer>().flipX = !toLeft;
     }
     private void SetIdleAnimation(bool toLeft)
     {
@@ -154,7 +153,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("isJumping", false);
         playerAnimator.SetBool("isFalling", false);
         playerAnimator.SetBool("isDancing", false);
-        gameObject.GetComponent<SpriteRenderer>().flipX = !toLeft;
     }
     private void SetFallingAnimation(bool toLeft)
     {
@@ -164,7 +162,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("isJumping", false);
         playerAnimator.SetBool("isFalling", true);
         playerAnimator.SetBool("isDancing", false);
-        gameObject.GetComponent<SpriteRenderer>().flipX = !toLeft;
     }
     private void SetDanceAnimation(bool toLeft)
     {
@@ -174,7 +171,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("isJumping", false);
         playerAnimator.SetBool("isFalling", false);
         playerAnimator.SetBool("isDancing", true);
-        gameObject.GetComponent<SpriteRenderer>().flipX = !toLeft;
     }
 
     enum AnimationState
