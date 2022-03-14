@@ -33,6 +33,7 @@ public class LobbyUIHandler : MonoBehaviour
                 readyButton.AddToClassList("is-ready-button");
                 readyButton.text = "Ready!";
                 readyButton.SetEnabled(false);
+                //RenderPlayerNames();
                 //Destroy(gameObject);
             }
             catch 

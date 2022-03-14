@@ -10,7 +10,6 @@ public class VerticalLoop : MonoBehaviour
     private Vector2 screenBounds;
     public float choke;
 
-    private float halfObjectWidth;
     private float halfObjectHeight;
 
     void Start()
@@ -45,7 +44,7 @@ public class VerticalLoop : MonoBehaviour
                 firstChild.transform.SetAsLastSibling();
                 firstChild.transform.position = new Vector3(lastChild.transform.position.x, lastChild.transform.position.y + halfObjectHeight * 2, lastChild.transform.position.z);
             }
-            else if (mainCamera.gameObject.transform.position.y - screenBounds.y < firstChild.transform.position.y - halfObjectWidth)
+            else if (mainCamera.gameObject.transform.position.y - screenBounds.y < firstChild.transform.position.y - halfObjectHeight)
             {
                 lastChild.transform.SetAsFirstSibling();
                 lastChild.transform.position = new Vector3(firstChild.transform.position.x, firstChild.transform.position.y - halfObjectHeight * 2, firstChild.transform.position.z);

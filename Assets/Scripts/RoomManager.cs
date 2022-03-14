@@ -53,6 +53,7 @@ public class RoomManager : MonoBehaviour
         colyseusRoom.State.platforms.OnRemove(GameManager.Instance.OnPlatformRemove);
 
         colyseusRoom.State.OnFloorChange(GameManager.Instance.OnFloorPositionChange);
+        colyseusRoom.State.OnScoreChange(GameManager.Instance.OnScoreChange);
         
         GameManager.Instance.myPlayerKey = colyseusRoom.SessionId;
     }
@@ -72,7 +73,7 @@ public class RoomManager : MonoBehaviour
     private async void OnApplicationQuit()
     {
         Debug.Log("Leave");
-        await colyseusRoom?.Leave();
+        await colyseusRoom?.Leave(); 
         IsConnecting = false;
     }
 }

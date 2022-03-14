@@ -2,9 +2,7 @@
     <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=e8341d737e445d94086ea565b17d07eb&amp;type=3#style" />
     <ui:VisualElement class="root-container">
         <ui:Label text="Game Over" display-tooltip-when-elided="true" name="title-text" class="title-text" />
-        <ui:Label text="Score: 0" display-tooltip-when-elided="true" name="score-text" class="your-score" />
-        <ui:Label text="Rank: -" display-tooltip-when-elided="true" name="rank-text" focusable="true" class="your-score" />
-        <ui:Button text="Back To Lobby" display-tooltip-when-elided="true" name="lobby-button" focusable="false" class="button-primary" />
-        <ui:Button text="Exit Game" display-tooltip-when-elided="true" name="exit-button" focusable="false" class="button-primary" />
+        <ui:Label text="Score: -" display-tooltip-when-elided="true" name="score-text" class="your-score" />
+        <ui:Label text="Rank: -" display-tooltip-when-elided="true" name="rank-text" focusable="true" class="your-score" style="opacity: 0;" />
     </ui:VisualElement>
 </ui:UXML>

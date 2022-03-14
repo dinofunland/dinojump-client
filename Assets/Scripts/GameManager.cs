@@ -12,11 +12,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     LobbyUIHandler lobbyUIHandler;
+    ScoreUIHandler scoreUIHandler;
+  
     SpawnManager spawnManager;
 
     [SerializeField]
     public GameObject playerPrefab;
-
+    [SerializeField]
+    private GameObject scoreUI;
     [SerializeField]
     private GameObject countdownUI;
     [SerializeField]
@@ -26,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<string, PlayerSchema> playerList = new Dictionary<string, PlayerSchema>();
 
+    public int Score;
     public string myPlayerKey;
     // Start is called before the first frame update
     void Start()
@@ -63,6 +67,16 @@ public class GameManager : MonoBehaviour
         ground.transform.position = new Vector2(groundSchema.position.x, groundSchema.position.y - groundHeight);
     }
 
+    internal void OnScoreChange(float currentValue, float previousValue)
+    {
+        Score = (int)Mathf.Ceil(currentValue);
+        if (Score > 0)
+        { 
+            if(scoreUIHandler == null)
+                scoreUIHandler = scoreUI.GetComponent<ScoreUIHandler>();
+            scoreUIHandler.SetNewScore(Score);
+        }
+    }
 
     internal void OnFloorPositionChange(FloorSchema currentValue, FloorSchema previousValue)
     {
@@ -126,14 +140,17 @@ public class GameManager : MonoBehaviour
                 PrepareLobby();
                 break;
             case "Starting":
+                
                 lobbyUI.SetActive(false);
                 countdownUI.SetActive(true);
                 StartCoroutine("CountDown");
+                scoreUI.SetActive(true);
                 break;
             case "Ongoing":
                 countdownUI.SetActive(false);
                 break;
             case "Ended":
+                scoreUI.SetActive(false);
                 //foreach (PlatformBase pb in FindObjectsOfType<PlatformBase>())
                 //    Destroy(pb.gameObject);
                 gameOverUI.SetActive(true);
@@ -197,6 +214,7 @@ public class GameManager : MonoBehaviour
         playerSchema.OnChange(() => {
             //Debug.Log(playerSchema);
             playerController.playerSchema = playerSchema;
+            OnPlayerChange(playerSchema.sessionId, playerSchema);
         });
 
 
@@ -213,11 +231,11 @@ public class GameManager : MonoBehaviour
     }
     internal void OnPlayerChange(string key, PlayerSchema playerSchema)
     {
-        Debug.Log("player change");
         playerList[key] = playerSchema;
         if (lobbyUIHandler == null)
         {
             lobbyUIHandler = lobbyUI.GetComponent<LobbyUIHandler>();
+            
         }
         lobbyUIHandler.RenderPlayerNames();
     }
