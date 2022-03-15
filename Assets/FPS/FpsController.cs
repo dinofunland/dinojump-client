@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class FpsController : MonoBehaviour
 {
-    public float pollingTime = 1f;
+    public float pollingTime = 10f;
     public bool showFpsCounter = false;
     private float time;
     private int frameCount;

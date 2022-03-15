@@ -61,3 +61,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5457ee927b5bc3243830b1377ddc9efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pollingTime: 10
+  showFpsCounter: 0
