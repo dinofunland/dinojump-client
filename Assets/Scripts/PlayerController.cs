@@ -5,25 +5,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {    
-    public float SpeedLerp = .02f;
+    [SerializeField]
+    private float SpeedLerp = .02f;
     public PlayerSchema playerSchema;
     [SerializeField] public string playerKey;
 
     Animator playerAnimator;
 
-    [SerializeField]
-    AnimatorOverrideController blueAnim;
-    [SerializeField]
-    AnimatorOverrideController yellowAnim;
-    [SerializeField]
-    AnimatorOverrideController greenAnim;
-    [SerializeField]
-    AnimatorOverrideController purpleAnim;
+    [SerializeField] AnimatorOverrideController blueAnim;
+    [SerializeField] AnimatorOverrideController yellowAnim;
+    [SerializeField] AnimatorOverrideController greenAnim;
+    [SerializeField] AnimatorOverrideController purpleAnim;
 
-    [SerializeField]
-    GameObject lavaSplashAnimation;
-
-    public AudioSource jumpSound;
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip dropSound;
+    private AudioSource audioPlayer;
 
     private DinoPicker.DinoSkin currentSkin;
     private AnimationState currentAnimation;
@@ -35,9 +31,11 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        jumpSound = GetComponent<AudioSource>();
         currentSkin = DinoPicker.DinoSkin.Blue;
+        audioPlayer = GetComponent<AudioSource>();
         playerAnimator = GetComponent<Animator>();
+        jumpSound.LoadAudioData();
+        dropSound.LoadAudioData();
     }
 
     // Update is called once per frame
@@ -54,25 +52,11 @@ public class PlayerController : MonoBehaviour
         if (playerSchema?.skin != (int)currentSkin)
         {
             SetPlayerSkin();
-            
         }
         if ((AnimationState)playerSchema?.animation != currentAnimation || playerSchema?.input.left != currentLeft || playerSchema?.input.right != currentRight)
         {
             SetAnimationState();
-
         }
-
-        //TODO: Implement Event / State on Server
-        return;
-        OnTouchLava();
-
-    }
-
-    private void OnTouchLava()
-    {
-        Debug.Log(playerKey + " touched Lava.");
-        //instantiate lava splash animation
-        Instantiate(lavaSplashAnimation, transform.position, lavaSplashAnimation.transform.rotation);
     }
 
     private void SetAnimationState()
@@ -85,28 +69,39 @@ public class PlayerController : MonoBehaviour
             currentRight = playerSchema.input.right;
         }
 
-        gameObject.GetComponent<SpriteRenderer>().flipX = !currentLeft;
 
+        ResetAnimationVariables();
+
+        if (false)//playerSchema.isDead)
+        {
+            //TODO Trigger Death Animation
+            return;
+
+            audioPlayer.PlayOneShot(dropSound);
+            SetDeathAnimation();
+            return;
+        }
+        gameObject.GetComponent<SpriteRenderer>().flipX = !currentLeft;
         switch (currentAnimation)
         {
             default:
-                SetIdleAnimation(currentLeft);
+                SetIdleAnimation();
                 break;
             case AnimationState.Walking:
-                SetWalkAnimation(currentLeft);
+                SetWalkAnimation();
                 break;
             case AnimationState.Jumping:
-                if (previousAnimation != AnimationState.Jumping)
+                if (previousAnimation != AnimationState.Jumping && previousAnimation != AnimationState.Falling)
                 {
-                    SetJumpAnimation(currentLeft);
-                    jumpSound.Play();
+                    audioPlayer.PlayOneShot(jumpSound);
+                    SetJumpAnimation();
                 }
                 break;
             case AnimationState.Falling:
-                SetFallingAnimation(currentLeft);
+                SetFallingAnimation();
                 break;
             case AnimationState.Dancing:
-                SetDanceAnimation(currentLeft);
+                SetDanceAnimation();
                 break;
         }
     }
@@ -132,45 +127,46 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SetWalkAnimation(bool toLeft)
-    {
-        playerAnimator.SetBool("isJumping", false);
-        playerAnimator.SetBool("isWalking", true);
-        playerAnimator.SetBool("isFalling", false);
-        playerAnimator.SetBool("isDancing", false);
-        
-    }
-    private void SetJumpAnimation(bool toLeft)
+    private void ResetAnimationVariables()
     {
         playerAnimator.SetBool("isWalking", false);
+        playerAnimator.SetBool("isJumping", false);
+        playerAnimator.SetBool("isFalling", false);
+        playerAnimator.SetBool("isDancing", false);
+        playerAnimator.SetBool("isDead", false);
+    }
+
+    private void SetWalkAnimation()
+    {
+        playerAnimator.SetBool("isWalking", true); 
+    }
+    private void SetJumpAnimation()
+    {
         playerAnimator.SetBool("isJumping", true);
-        playerAnimator.SetBool("isFalling", false);
-        playerAnimator.SetBool("isDancing", false);
     }
-    private void SetIdleAnimation(bool toLeft)
+    private void SetIdleAnimation()
     {
-        playerAnimator.SetBool("isWalking", false);
-        playerAnimator.SetBool("isJumping", false);
-        playerAnimator.SetBool("isFalling", false);
-        playerAnimator.SetBool("isDancing", false);
+        ResetAnimationVariables();
     }
-    private void SetFallingAnimation(bool toLeft)
+    private void SetFallingAnimation()
     {
         //TODO: Create Sprites, Animation and add to AnimatorController
         return;
-        playerAnimator.SetBool("isWalking", false);
-        playerAnimator.SetBool("isJumping", false);
         playerAnimator.SetBool("isFalling", true);
-        playerAnimator.SetBool("isDancing", false);
+
     }
-    private void SetDanceAnimation(bool toLeft)
+    private void SetDanceAnimation()
     {
         //TODO: Create Sprites, Animation and add to AnimatorController
         return;
-        playerAnimator.SetBool("isWalking", false);
-        playerAnimator.SetBool("isJumping", false);
-        playerAnimator.SetBool("isFalling", false);
         playerAnimator.SetBool("isDancing", true);
+
+    }
+
+    private void SetDeathAnimation()
+    {
+        return;
+        playerAnimator.SetBool("isDead", true);
     }
 
     enum AnimationState
