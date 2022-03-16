@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="align-items: flex-end;">
+        <ui:Label text="30 FPS" display-tooltip-when-elided="true" name="fps-counter" style="-unity-font: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=69c1a5ab80c55db46960926263779f49&amp;type=3#NotInter-Regular&apos;); align-items: center; flex-direction: column; font-size: 18px; -unity-font-style: bold; -unity-background-image-tint-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0.41); padding-left: 4px; padding-right: 4px; padding-top: 4px; padding-bottom: 4px; color: rgb(255, 255, 255);" />
+    </ui:VisualElement>
+</ui:UXML>

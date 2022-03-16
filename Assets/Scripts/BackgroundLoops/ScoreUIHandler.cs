@@ -15,6 +15,6 @@ public class ScoreUIHandler : MonoBehaviour
 
     internal void SetNewScore(int score)
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = score.ToString();
     }
 }

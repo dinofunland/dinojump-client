@@ -1,5 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1; align-items: flex-start; font-size: 20px; color: rgb(26, 180, 18); margin-left: 20px; margin-top: 20px;">
-        <ui:Label text="Score: -" display-tooltip-when-elided="true" name="score-text" />
+    <ui:VisualElement style="align-items: stretch; flex-direction: column;">
+        <ui:VisualElement style="flex-grow: 1; align-items: center; font-size: 20px; color: rgb(26, 180, 18); margin-left: 20px; margin-top: 20px; flex-direction: row; justify-content: flex-start;">
+            <ui:VisualElement style="background-image: url(&apos;project://database/Assets/Sprites/Icons/pokal.png?fileID=2800000&amp;guid=e9ef67f421f953043936d707cc3b514a&amp;type=3#pokal&apos;); width: 32px; height: 32px;" />
+            <ui:Label text="0" display-tooltip-when-elided="true" name="score-text" style="color: rgba(255, 255, 255, 255);" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
