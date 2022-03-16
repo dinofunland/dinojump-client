@@ -27,6 +27,6 @@ public class GameOverUIHandler : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
         scoreText = root.Q<Label>("score-text");
 
-        scoreText.text = "Score: " + GameManager.Instance.Score;
+        scoreText.text = GameManager.Instance.Score.ToString();
     }
 }
