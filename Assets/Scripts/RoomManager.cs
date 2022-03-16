@@ -25,8 +25,8 @@ public class RoomManager : MonoBehaviour
 
         Instance = this;
         
-        colyseusClient = NetworkManager.Instance.CreateClient("wss://" + "dinojump-server.herokuapp.com");
-        // colyseusClient = NetworkManager.Instance.CreateClient("ws://" + "localhost:3002");
+        //colyseusClient = NetworkManager.Instance.CreateClient("wss://" + "dinojump-server.herokuapp.com");
+        colyseusClient = NetworkManager.Instance.CreateClient("ws://" + "localhost:3000");
     }
 
     public async Task ConnectLobby(string playerName, string code = null)
