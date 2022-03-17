@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     List<GameObject> platformPrefabs;
 
     [SerializeField]
-    float lerpSpeed;
+    float lerpSpeed = 0.03f;
 
     float platformYOffset = 1.2f;
     public void SpawnPlatform(string key, PlatformSchema platSchema)
@@ -57,8 +57,9 @@ public class SpawnManager : MonoBehaviour
 
     internal void UpdatePlatform(string key, PlatformSchema value)
     {
-        var platform = FindObjectsOfType<PlatformBase>().FirstOrDefault(p => p.Key == key).gameObject;
-        if (platform != null)
+        Debug.Log("Update called with Key: " + key);
+        var platform = FindObjectsOfType<PlatformBase>().FirstOrDefault(p => p.Key == key);
+        if (platform?.transform != null && value?.position != null)
         {
             Vector3.Lerp(platform.transform.position, new Vector2(value.position.x, value.position.y), Time.deltaTime * lerpSpeed);
             platform.GetComponent<PlatformBase>().PlatformSchema = value;
