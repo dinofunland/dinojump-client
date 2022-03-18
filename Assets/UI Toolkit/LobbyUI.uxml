@@ -5,7 +5,7 @@
         <ui:Label text="#CODE#" display-tooltip-when-elided="true" name="lobby-code-text" enable-rich-text="true" class="your-score" />
         <ui:VisualElement name="Container" style="flex-direction: row; flex-grow: 1; flex-wrap: nowrap; justify-content: space-between;">
             <ui:VisualElement>
-                <ui:Label text="Player" display-tooltip-when-elided="true" name="player-text" enable-rich-text="true" style="-unity-font: none; font-size: 20px; -unity-font-style: bold;" />
+                <ui:Label text="Player" display-tooltip-when-elided="true" name="player-text" enable-rich-text="true" style="-unity-font: none; font-size: 20px; -unity-font-style: bold; color: rgba(255, 255, 255, 255); -unity-text-outline-color: rgba(0, 0, 0, 255); -unity-text-outline-width: 0;" />
                 <ui:VisualElement name="player-container" style="margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; align-items: flex-start; justify-content: flex-start; flex-direction: column; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
                     <ui:Label text="Label" display-tooltip-when-elided="true" class="player-list-item" />
                     <ui:Label text="Label" display-tooltip-when-elided="true" class="player-list-item-ready" />
@@ -21,6 +21,7 @@
         </ui:VisualElement>
         <ui:VisualElement style="margin-left: 200px; margin-right: 200px;">
             <ui:Button text="Ready?" display-tooltip-when-elided="true" name="ready-button" focusable="false" class="button-primary" style="flex-direction: column; justify-content: flex-end; align-items: center; white-space: nowrap; -unity-text-align: middle-center; flex-shrink: 0;" />
+            <ui:Button text="Leave Lobby" display-tooltip-when-elided="false" name="leave-button" focusable="false" class="button-primary" style="flex-direction: column; justify-content: flex-end; align-items: center; white-space: nowrap; -unity-text-align: middle-center; flex-shrink: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

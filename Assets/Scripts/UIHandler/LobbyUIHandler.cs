@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class LobbyUIHandler : MonoBehaviour
@@ -11,6 +12,7 @@ public class LobbyUIHandler : MonoBehaviour
     Label lobbyCode;
     VisualElement playerContainer;
     Button readyButton;
+    Button leaveButton;
 
     Button btnBlue;
     Button btnGreen;
@@ -46,6 +48,22 @@ public class LobbyUIHandler : MonoBehaviour
         }
     }
 
+    async void OnLeave_Clicked()
+    {
+        if (RoomManager.Instance?.colyseusRoom != null)
+        {
+            try
+            {
+                await RoomManager.Instance.colyseusRoom.Leave();
+                SceneManager.LoadScene("Main");
+            }
+            catch(Exception ex)
+            {
+                Debug.Log("Exception while Leaving Room: " + ex);
+            }
+        }
+    }
+
     private void InitializeUI()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -55,6 +73,10 @@ public class LobbyUIHandler : MonoBehaviour
         readyButton.clicked += OnReady_Clicked;
         readyButton.SetEnabled(true);
         playerContainer.Clear();
+
+        leaveButton = root.Q<Button>("leave-button");
+        leaveButton.clicked += OnLeave_Clicked;
+        leaveButton.SetEnabled(true);
     }
 
     public void SetLobbyCode(string code)
