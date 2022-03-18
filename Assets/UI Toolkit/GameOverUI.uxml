@@ -1,10 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=e8341d737e445d94086ea565b17d07eb&amp;type=3#style" />
     <ui:VisualElement class="root-container" style="justify-content: center; flex-direction: column; flex-wrap: nowrap; align-items: center; margin-bottom: 307px;">
-        <ui:VisualElement style="background-image: url(&apos;project://database/Assets/Sprites/Icons/deathskull2.png?fileID=2800000&amp;guid=376170e75e3697148aa681f2b54157db&amp;type=3#deathskull2&apos;); width: 235px; height: 126px; align-items: flex-end; flex-direction: row; justify-content: space-between;" />
-        <ui:VisualElement style="flex-direction: row; justify-content: flex-start; align-items: center;">
+        <ui:VisualElement style="background-image: url(&apos;project://database/Assets/Sprites/Icons/deathskull2.png?fileID=2800000&amp;guid=376170e75e3697148aa681f2b54157db&amp;type=3#deathskull2&apos;); width: 235px; height: 126px; align-items: auto; flex-direction: row; justify-content: flex-start; flex-shrink: 0; -unity-background-scale-mode: scale-to-fit;" />
+        <ui:VisualElement style="flex-direction: row; justify-content: center; align-items: center;">
             <ui:VisualElement style="background-image: url(&apos;project://database/Assets/Sprites/Icons/pokal2.png?fileID=2800000&amp;guid=dbe8d3acbf1ad84409cf0ec698073dc8&amp;type=3#pokal2&apos;); width: 28px; height: 28px;" />
-            <ui:Label text="420" display-tooltip-when-elided="true" name="score-text" class="your-score" style="align-items: auto; justify-content: flex-start; color: rgb(239, 205, 61);" />
+            <ui:Label text="420" display-tooltip-when-elided="true" name="score-text" class="your-score" style="align-items: auto; justify-content: flex-start; color: rgb(239, 205, 61); -unity-text-align: middle-center;" />
         </ui:VisualElement>
         <ui:Label text="Rank: -" display-tooltip-when-elided="true" name="rank-text" focusable="true" class="your-score" style="opacity: 0;" />
     </ui:VisualElement>
