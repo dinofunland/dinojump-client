@@ -34,6 +34,9 @@ namespace Dinojump.Schemas {
 		[Type(7, "uint16")]
 		public ushort animation = default(ushort);
 
+		[Type(8, "boolean")]
+		public bool isDead = default(bool);
+
 		/*
 		 * Support for individual property change callbacks below...
 		 */
@@ -126,6 +129,17 @@ namespace Dinojump.Schemas {
 			};
 		}
 
+		protected event PropertyChangeHandler<bool> _isDeadChange;
+		public Action OnIsDeadChange(PropertyChangeHandler<bool> handler) {
+			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
+			__callbacks.AddPropertyCallback(nameof(isDead));
+			_isDeadChange += handler;
+			return () => {
+				__callbacks.RemovePropertyCallback(nameof(isDead));
+				_isDeadChange -= handler;
+			};
+		}
+
 		protected override void TriggerFieldChange(DataChange change) {
 			switch (change.Field) {
 				case nameof(sessionId): _sessionIdChange?.Invoke((string) change.Value, (string) change.PreviousValue); break;
@@ -136,6 +150,7 @@ namespace Dinojump.Schemas {
 				case nameof(input): _inputChange?.Invoke((InputSchema) change.Value, (InputSchema) change.PreviousValue); break;
 				case nameof(skin): _skinChange?.Invoke((ushort) change.Value, (ushort) change.PreviousValue); break;
 				case nameof(animation): _animationChange?.Invoke((ushort) change.Value, (ushort) change.PreviousValue); break;
+				case nameof(isDead): _isDeadChange?.Invoke((bool) change.Value, (bool) change.PreviousValue); break;
 				default: break;
 			}
 		}
