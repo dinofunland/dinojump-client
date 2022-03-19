@@ -21,12 +21,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip dropSound;
     private AudioSource audioPlayer;
 
+    SpriteRenderer spriteRenderer;
+
     private DinoPicker.DinoSkin currentSkin;
     private AnimationState currentAnimation;
     private AnimationState previousAnimation;
     private bool currentLeft;
     private bool currentRight;
 
+    private bool deathAnimationSet;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +39,7 @@ public class PlayerController : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         jumpSound.LoadAudioData();
         dropSound.LoadAudioData();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -53,9 +57,22 @@ public class PlayerController : MonoBehaviour
         {
             SetPlayerSkin();
         }
+        if (playerSchema.isDead && !deathAnimationSet)
+        {
+            spriteRenderer.sortingOrder = 999;
+            audioPlayer.PlayOneShot(dropSound);
+            SetDeathAnimation();
+        }
         if ((AnimationState)playerSchema?.animation != currentAnimation || playerSchema?.input.left != currentLeft || playerSchema?.input.right != currentRight)
         {
-            SetAnimationState();
+            if (!playerSchema.isDead) 
+            {
+                Debug.Log("Setting AnimationState: " + playerSchema.animation);
+                deathAnimationSet = false;
+                spriteRenderer.sortingOrder = 0;
+                SetAnimationState();
+            }
+                
         }
     }
 
@@ -72,15 +89,7 @@ public class PlayerController : MonoBehaviour
 
         ResetAnimationVariables();
 
-        if (false)//playerSchema.isDead)
-        {
-            //TODO Trigger Death Animation
-            return;
 
-            audioPlayer.PlayOneShot(dropSound);
-            SetDeathAnimation();
-            return;
-        }
         gameObject.GetComponent<SpriteRenderer>().flipX = !currentLeft;
         switch (currentAnimation)
         {
@@ -165,8 +174,10 @@ public class PlayerController : MonoBehaviour
 
     private void SetDeathAnimation()
     {
-        return;
+        Debug.Log("DeathAnimationSet");
+        ResetAnimationVariables();
         playerAnimator.SetBool("isDead", true);
+        deathAnimationSet = true;
     }
 
     enum AnimationState
