@@ -18,7 +18,7 @@ public class PlatformBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlatformSchema?.position != null && PlatformSchema.Type == "Moving")
+        if (PlatformSchema?.position != null && PlatformSchema.type == "Moving")
         {
             var t = Time.deltaTime / SpeedLerp;
             Vector2 desiredPostion = new Vector3(PlatformSchema.position.x, PlatformSchema.position.y);
