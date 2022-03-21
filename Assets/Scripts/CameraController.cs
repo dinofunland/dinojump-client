@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
             if (CameraTarget != null)
             {
                 var desiredPosition = CameraTarget.position + OffsetCamera;
-                var t = Time.deltaTime / SpeedCamera;
+                var t = Time.deltaTime * SpeedCamera;
                 transform.position = Vector3.Lerp(transform.position, desiredPosition, t);
             }
 

@@ -474,7 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OffsetCamera: {x: 0, y: 0, z: -10}
-  SpeedCamera: 0.001
+  SpeedCamera: 50000
   IsFocusingPlayer: 1
   CameraTarget: {fileID: 0}
 --- !u!114 &1005557177

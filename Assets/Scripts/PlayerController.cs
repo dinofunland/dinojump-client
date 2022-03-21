@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {    
     [SerializeField]
-    private float SpeedLerp = .02f;
+    private float SpeedLerp = 10000f;
     float splashOffset = 8f;
     public PlayerSchema playerSchema;
     [SerializeField] public string playerKey;
@@ -44,13 +44,13 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         playerKey = playerSchema?.sessionId;
         
         if (playerSchema?.position != null && !deathAnimationSet)
         {
-            var t = Time.deltaTime / SpeedLerp;
+            var t = Time.deltaTime * SpeedLerp;
             Vector2 desiredPostion = new Vector3(playerSchema.position.x, playerSchema.position.y);
             transform.position = Vector2.Lerp(transform.position, desiredPostion, t);
         }
