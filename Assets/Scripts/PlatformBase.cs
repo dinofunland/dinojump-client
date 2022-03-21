@@ -8,7 +8,6 @@ public class PlatformBase : MonoBehaviour
     public PlatformSchema PlatformSchema;
     public string Key;
 
-    Vector2 previousPos = new Vector2(0,0);
     // Start is called before the first frame update
     void Start()
     {
@@ -18,15 +17,12 @@ public class PlatformBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlatformSchema?.position != null)
+        if (PlatformSchema?.position != null && (PlatformSchema?.position.x != transform.position.x || PlatformSchema?.position.y != transform.position.y))
+
         {
-            if (PlatformSchema.position.y != previousPos.x || PlatformSchema.position.y != previousPos.x)
-            {
                 var t = Time.deltaTime / SpeedLerp;
                 Vector2 desiredPostion = new Vector3(PlatformSchema.position.x, PlatformSchema.position.y);
                 transform.position = Vector2.Lerp(transform.position, desiredPostion, t);
-                previousPos = new Vector2(PlatformSchema.position.x, PlatformSchema.position.y);
-            }
         }
     }
 
