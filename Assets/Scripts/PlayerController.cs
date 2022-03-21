@@ -7,8 +7,7 @@ public class PlayerController : MonoBehaviour
 {    
     [SerializeField]
     private float SpeedLerp = .02f;
-    [SerializeField]
-    private float splashOffset = 2f;
+    float splashOffset = 8f;
     public PlayerSchema playerSchema;
     [SerializeField] public string playerKey;
 
