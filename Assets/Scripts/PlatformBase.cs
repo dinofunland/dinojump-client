@@ -7,6 +7,8 @@ public class PlatformBase : MonoBehaviour
 {
     public PlatformSchema PlatformSchema;
     public string Key;
+    [SerializeField]
+    float lerpSpeed = 0.2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,11 @@ public class PlatformBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (PlatformSchema.type == "Moving")
+        {
+            var newPos = new Vector2(PlatformSchema.position.x, PlatformSchema.position.y);
+            transform.position = Vector2.Lerp(transform.position, newPos, lerpSpeed);
+        }
     }
 
     private void OnDrawGizmos()
