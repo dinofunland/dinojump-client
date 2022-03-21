@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {    
     [SerializeField]
     private float SpeedLerp = .02f;
+    [SerializeField]
+    private float splashOffset = 2f;
     public PlayerSchema playerSchema;
     [SerializeField] public string playerKey;
 
@@ -47,7 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         playerKey = playerSchema?.sessionId;
         
-        if (playerSchema?.position != null)
+        if (playerSchema?.position != null && !deathAnimationSet)
         {
             var t = Time.deltaTime / SpeedLerp;
             Vector2 desiredPostion = new Vector3(playerSchema.position.x, playerSchema.position.y);
@@ -60,6 +62,13 @@ public class PlayerController : MonoBehaviour
         if (playerSchema.isDead && !deathAnimationSet)
         {
             spriteRenderer.sortingOrder = 999;
+            Vector3 newPos = transform.position;
+
+            //set lavaanimation on top of lavalake
+            var floor = FindObjectOfType<LavaController>();
+            newPos.y = floor.GetComponentInChildren<SpriteRenderer>().bounds.extents.y + floor.transform.position.y + splashOffset;
+            transform.position = newPos;
+
             audioPlayer.PlayOneShot(dropSound);
             SetDeathAnimation();
         }

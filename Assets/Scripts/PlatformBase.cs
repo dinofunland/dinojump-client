@@ -7,8 +7,8 @@ public class PlatformBase : MonoBehaviour
     private float SpeedLerp = .02f;
     public PlatformSchema PlatformSchema;
     public string Key;
-    [SerializeField]
-    float lerpSpeed = 0.2f;
+
+    Vector2 previousPos = new Vector2(0,0);
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +18,15 @@ public class PlatformBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlatformSchema?.position != null && PlatformSchema.type == "Moving")
+        if (PlatformSchema?.position != null)
         {
-            var t = Time.deltaTime / SpeedLerp;
-            Vector2 desiredPostion = new Vector3(PlatformSchema.position.x, PlatformSchema.position.y);
-            transform.position = Vector2.Lerp(transform.position, desiredPostion, t);
+            if (PlatformSchema.position.y != previousPos.x || PlatformSchema.position.y != previousPos.x)
+            {
+                var t = Time.deltaTime / SpeedLerp;
+                Vector2 desiredPostion = new Vector3(PlatformSchema.position.x, PlatformSchema.position.y);
+                transform.position = Vector2.Lerp(transform.position, desiredPostion, t);
+                previousPos = new Vector2(PlatformSchema.position.x, PlatformSchema.position.y);
+            }
         }
     }
 
