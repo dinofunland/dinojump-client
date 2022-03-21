@@ -1,10 +1,10 @@
 using Dinojump.Schemas;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformBase : MonoBehaviour
 {
+    [SerializeField]
+    private float SpeedLerp = .02f;
     public PlatformSchema PlatformSchema;
     public string Key;
     [SerializeField]
@@ -18,10 +18,11 @@ public class PlatformBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlatformSchema.type == "Moving")
+        if (PlatformSchema?.position != null && PlatformSchema.Type == "Moving")
         {
-            var newPos = new Vector2(PlatformSchema.position.x, PlatformSchema.position.y);
-            transform.position = Vector2.Lerp(transform.position, newPos, lerpSpeed);
+            var t = Time.deltaTime / SpeedLerp;
+            Vector2 desiredPostion = new Vector3(PlatformSchema.position.x, PlatformSchema.position.y);
+            transform.position = Vector2.Lerp(transform.position, desiredPostion, t);
         }
     }
 
