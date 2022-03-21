@@ -1,10 +1,10 @@
 using Dinojump.Schemas;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformBase : MonoBehaviour
 {
+    [SerializeField]
+    private float SpeedLerp = .02f;
     public PlatformSchema PlatformSchema;
     public string Key;
     // Start is called before the first frame update
@@ -16,7 +16,12 @@ public class PlatformBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (PlatformSchema?.position != null)
+        {
+            var t = Time.deltaTime / SpeedLerp;
+            Vector2 desiredPostion = new Vector3(PlatformSchema.position.x, PlatformSchema.position.y);
+            transform.position = Vector2.Lerp(transform.position, desiredPostion, t);
+        }
     }
 
     private void OnDrawGizmos()
