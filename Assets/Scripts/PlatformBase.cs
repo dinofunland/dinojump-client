@@ -8,17 +8,9 @@ public class PlatformBase : MonoBehaviour
     public PlatformSchema PlatformSchema;
     public string Key;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-          
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (PlatformSchema?.position != null && (PlatformSchema?.position.x != transform.position.x || PlatformSchema?.position.y != transform.position.y))
-
         {
                 var t = Time.deltaTime / SpeedLerp;
                 Vector2 desiredPostion = new Vector3(PlatformSchema.position.x, PlatformSchema.position.y);
