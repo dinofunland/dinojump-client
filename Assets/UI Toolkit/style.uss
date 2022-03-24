@@ -10,6 +10,10 @@
 }
 
 .button-primary {
+    min-width: 0;
+    min-height: 25px;
+    -unity-font-definition: none;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/prstartk.ttf?fileID=12800000&guid=a80e4b465e7bf984896639dd277d87c6&type=3#prstartk');
 }
 
 .input-field {
@@ -147,4 +151,14 @@
     -unity-background-image-tint-color: rgb(255, 255, 255);
     background-color: rgb(12, 111, 32);
     color: rgb(255, 255, 255);
+}
+
+.unity-text-element {
+    -unity-font: url('project://database/Assets/UI%20Toolkit/prstartk.ttf?fileID=12800000&guid=a80e4b465e7bf984896639dd277d87c6&type=3#prstartk');
+    -unity-font-definition: none;
+}
+
+.unity-label {
+    -unity-font: url('project://database/Assets/UI%20Toolkit/prstartk.ttf?fileID=12800000&guid=a80e4b465e7bf984896639dd277d87c6&type=3#prstartk');
+    -unity-font-definition: none;
 }

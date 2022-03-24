@@ -4,6 +4,7 @@ using UnityEngine;
 using Colyseus;
 using Dinojump.Schemas;
 using System.Threading.Tasks;
+using System;
 
 public class RoomManager : MonoBehaviour
 {
@@ -24,7 +25,11 @@ public class RoomManager : MonoBehaviour
         }
 
         Instance = this;
-        
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void CreateClient()
+    {
         colyseusClient = NetworkManager.Instance.CreateClient("wss://" + "dinojump-server.herokuapp.com");
         // colyseusClient = NetworkManager.Instance.CreateClient("ws://" + "localhost:3002");
     }
@@ -32,16 +37,26 @@ public class RoomManager : MonoBehaviour
     public async Task ConnectLobby(string playerName, string code = null)
     {
         if(IsConnecting) return;
+        CreateClient();
 
         IsConnecting = true;
         Dictionary<string, object> roomOptions = new Dictionary<string, object>
         {
             ["name"] = playerName,
         };
-        if(!string.IsNullOrEmpty(code))
-             colyseusRoom = await colyseusClient.JoinById<GameSchema>(code, roomOptions);
-        else
-            colyseusRoom = await colyseusClient.JoinOrCreate<GameSchema>("GameRoom", roomOptions);
+        try
+        {
+            if (!string.IsNullOrEmpty(code))
+                colyseusRoom = await colyseusClient.JoinById<GameSchema>(code, roomOptions);
+            else
+                colyseusRoom = await colyseusClient.JoinOrCreate<GameSchema>("GameRoom", roomOptions);
+        }
+        catch(Exception ex)
+        {
+            IsConnecting = false;
+            throw ex;
+        }
+
         
         colyseusRoom.State.players.OnAdd(GameManager.Instance.OnPlayerAdd);
         colyseusRoom.State.players.OnRemove(GameManager.Instance.OnPlayerRemove);
@@ -54,8 +69,16 @@ public class RoomManager : MonoBehaviour
 
         colyseusRoom.State.OnFloorChange(GameManager.Instance.OnFloorPositionChange);
         colyseusRoom.State.OnScoreChange(GameManager.Instance.OnScoreChange);
+        colyseusRoom.OnLeave += GameManager.Instance.OnLeaveLobby;
+        colyseusRoom.OnError += GameManager.Instance.OnLobbyError;
+        colyseusRoom.OnLeave += OnLeaveLobby;
+        colyseusRoom.OnError += OnLobbyError;
         GameManager.Instance.myPlayerKey = colyseusRoom.SessionId;
+
+        IsConnecting = false;
     }
+
+
 
     public void Examples(string playerName)
     {
@@ -69,10 +92,25 @@ public class RoomManager : MonoBehaviour
         });
     }
 
-    private async void OnApplicationQuit()
+
+    private void OnApplicationQuit()
+    {
+        LeaveRoom();
+    }
+    private void OnLobbyError(int code, string message)
+    {
+        LeaveRoom();
+    }
+
+    private void OnLeaveLobby(int code)
+    {
+        LeaveRoom();
+    }
+
+    async void LeaveRoom() 
     {
         Debug.Log("Leave");
-        await colyseusRoom?.Leave(); 
+        await colyseusRoom?.Leave();
         IsConnecting = false;
     }
 }

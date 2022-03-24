@@ -7,7 +7,7 @@ public class BounceScript : MonoBehaviour
     private Rigidbody2D rb2d;
 
     [SerializeField]
-    private float moveSpeed = 50.0f;
+    private float moveSpeed = 0.5f;
     float xBounds = 85f;
     float yBounds = 35f;
     void Go()
@@ -19,7 +19,7 @@ public class BounceScript : MonoBehaviour
         float randomX = Random.Range(-xBounds, xBounds);
         Vector2 position = new Vector2(randomX, randomY);
         gameObject.transform.position = position;
-
+        rb2d.AddForce(-gameObject.transform.right * (moveSpeed * 10));
     }
 
     void Start()
