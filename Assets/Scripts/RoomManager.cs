@@ -49,7 +49,7 @@ public class RoomManager : MonoBehaviour
             if (!string.IsNullOrEmpty(code))
                 colyseusRoom = await colyseusClient.JoinById<GameSchema>(code, roomOptions);
             else
-                colyseusRoom = await colyseusClient.JoinOrCreate<GameSchema>("GameRoom", roomOptions);
+                colyseusRoom = await colyseusClient.Create<GameSchema>("GameRoom", roomOptions);
         }
         catch(Exception ex)
         {
