@@ -24,7 +24,11 @@ public class RoomManager : MonoBehaviour
         }
 
         Instance = this;
-        
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void CreateClient()
+    {
         colyseusClient = NetworkManager.Instance.CreateClient("wss://" + "dinojump-server.herokuapp.com");
         // colyseusClient = NetworkManager.Instance.CreateClient("ws://" + "localhost:3002");
     }
@@ -32,6 +36,7 @@ public class RoomManager : MonoBehaviour
     public async Task ConnectLobby(string playerName, string code = null)
     {
         if(IsConnecting) return;
+        CreateClient();
 
         IsConnecting = true;
         Dictionary<string, object> roomOptions = new Dictionary<string, object>
@@ -54,6 +59,8 @@ public class RoomManager : MonoBehaviour
 
         colyseusRoom.State.OnFloorChange(GameManager.Instance.OnFloorPositionChange);
         colyseusRoom.State.OnScoreChange(GameManager.Instance.OnScoreChange);
+        colyseusRoom.OnLeave += GameManager.Instance.OnLeaveLobby;
+        colyseusRoom.OnError += GameManager.Instance.OnLobbyError;
         GameManager.Instance.myPlayerKey = colyseusRoom.SessionId;
     }
 

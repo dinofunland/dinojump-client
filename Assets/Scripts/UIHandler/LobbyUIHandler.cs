@@ -55,10 +55,11 @@ public class LobbyUIHandler : MonoBehaviour
             try
             {
                 await RoomManager.Instance.colyseusRoom.Leave();
-                SceneManager.LoadScene("Main");
+                GameManager.Instance.LoadMain();
             }
             catch(Exception ex)
             {
+                GameManager.Instance.LoadMain(ex.Message);
                 Debug.Log("Exception while Leaving Room: " + ex);
             }
         }

@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
 
     public int Score;
     public string myPlayerKey;
+
+    public List<string> ErrorMessages { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
         if (SceneManager.sceneCount == 1)
         {
             SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
@@ -67,6 +71,16 @@ public class GameManager : MonoBehaviour
         ground.transform.position = new Vector2(groundSchema.position.x, groundSchema.position.y - groundHeight);
     }
 
+    internal void OnLeaveLobby(int code)
+    {
+        LoadMain("Connection closed: " + code);
+    }
+
+    internal void OnLobbyError(int code, string message)
+    {
+        LoadMain("Lobby Error " + code.ToString() + ": " + message);
+    }
+
     internal void OnScoreChange(float currentValue, float previousValue)
     {
         Score = (int)Mathf.Ceil(currentValue);
@@ -88,19 +102,40 @@ public class GameManager : MonoBehaviour
     #region LobbyHandling
 
     //Join Lobby
-    public async void ConnectToLobby(string playerName, string code)
+    public async void ConnectToLobby(string playerName, string code = null)
     {
-        SceneManager.UnloadSceneAsync("Menu");
-        StartCoroutine(AwaitGameScene());
-        await RoomManager.Instance.ConnectLobby(playerName, code);
+        try
+        {
+            LoadLobby();
+            if(code != null)
+                await RoomManager.Instance.ConnectLobby(playerName, code);
+            else
+                await RoomManager.Instance.ConnectLobby(playerName);
+        }
+        catch (Exception ex)
+        {
+            LoadMain(ex.Message);
+        }
     }
 
-    //Create New
-    public async void ConnectToLobby(string playerName)
+    private void LoadLobby()
     {
+        Instance.ErrorMessages = new List<string>();
         SceneManager.UnloadSceneAsync("Menu");
         StartCoroutine(AwaitGameScene());
-        await RoomManager.Instance.ConnectLobby(playerName);
+    }
+    public void LoadMain(string error = null)
+    {
+        if (!string.IsNullOrEmpty(error))
+        {
+            Instance.ErrorMessages.Add(error);
+        }
+        SceneManager.UnloadSceneAsync("Game");
+        SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
+        lobbyUI.SetActive(false);
+        gameOverUI.SetActive(false);
+        scoreUI.SetActive(false);
+        countdownUI.SetActive(false);
     }
 
     void PrepareLobby()
@@ -156,11 +191,6 @@ public class GameManager : MonoBehaviour
                 gameOverUI.SetActive(true);
                 break;
         }
-    }
-
-    public void ExitGame()
-    {
-        SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
 
     IEnumerator CountDown()

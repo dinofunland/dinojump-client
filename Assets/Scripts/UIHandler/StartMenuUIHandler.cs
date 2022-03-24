@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,12 +11,13 @@ public class StartMenuUIHandler : MonoBehaviour
     TextField playerNameText;
     Button newLobbyButton;
     Button joinLobbyButton;
+    VisualElement errorMessagesContainer;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         InitializeUI();
-    }
+    }    
 
     // Update is called once per frame
     void Update()
@@ -33,6 +35,19 @@ public class StartMenuUIHandler : MonoBehaviour
 
         newLobbyButton.clicked += OnNewLobby_Clicked;
         joinLobbyButton.clicked += OnJoinLobby_Clicked;
+
+        errorMessagesContainer = root.Q<VisualElement>("error-messages");
+        errorMessagesContainer.Clear();
+
+        if (GameManager.Instance != null && GameManager.Instance.ErrorMessages != null && GameManager.Instance.ErrorMessages.Any())
+        {
+            foreach (var err in GameManager.Instance.ErrorMessages)
+            {
+                Label l = new Label();
+                l.text = err;
+                errorMessagesContainer.Add(l);
+            }
+        }
     }
 
     void OnNewLobby_Clicked()
@@ -48,7 +63,7 @@ public class StartMenuUIHandler : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(lobbyCodeText.text)  && !string.IsNullOrEmpty(playerNameText.text))
         {
-            GameManager.Instance.ConnectToLobby(playerNameText.text, lobbyCodeText.text);
+            GameManager.Instance?.ConnectToLobby(playerNameText.text, lobbyCodeText.text);
         }
     }
 }
