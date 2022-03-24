@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=e8341d737e445d94086ea565b17d07eb&amp;type=3#style" />
     <ui:VisualElement class="root-container" style="margin-left: 100px; margin-right: 100px;">
-        <ui:Label text="Lobby" display-tooltip-when-elided="true" name="title-text" class="title-text" style="-unity-font-definition: none;" />
+        <ui:Label text="Lobby" display-tooltip-when-elided="true" name="title-text" class="title-text" style="-unity-font-definition: none; color: rgba(255, 228, 122, 255);" />
         <ui:Label text="#CODE#" display-tooltip-when-elided="true" name="lobby-code-text" enable-rich-text="true" class="your-score" style="-unity-font-definition: none;" />
         <ui:VisualElement name="Container" style="flex-direction: row; flex-grow: 1; flex-wrap: nowrap; justify-content: space-between;">
             <ui:VisualElement>
