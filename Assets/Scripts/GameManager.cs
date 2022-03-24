@@ -121,6 +121,8 @@ public class GameManager : MonoBehaviour
     private void LoadLobby()
     {
         Instance.ErrorMessages = new List<string>();
+        Instance.playerList = new Dictionary<string, PlayerSchema>();
+        Instance.myPlayerKey = null;
         SceneManager.UnloadSceneAsync("Menu");
         StartCoroutine(AwaitGameScene());
     }
@@ -130,18 +132,19 @@ public class GameManager : MonoBehaviour
         {
             Instance.ErrorMessages.Add(error);
         }
-        SceneManager.UnloadSceneAsync("Game");
-        SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
+        
         lobbyUI.SetActive(false);
         gameOverUI.SetActive(false);
         scoreUI.SetActive(false);
         countdownUI.SetActive(false);
+
+        SceneManager.UnloadSceneAsync("Game");
+        SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Additive);
     }
 
     void PrepareLobby()
     {       
         countdownUI.SetActive(false);
-        //Instantiate(lobbyUI);
         lobbyUI.SetActive(true);
         lobbyUIHandler = lobbyUI.GetComponent<LobbyUIHandler>();
 
