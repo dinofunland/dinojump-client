@@ -7,8 +7,8 @@ public class BounceScript : MonoBehaviour
     private Rigidbody2D rb2d;
 
     [SerializeField]
-    private float moveSpeed = 0.5f;
-    float xBounds = 85f;
+    private float moveSpeed = 1f;
+    float xBounds = 80f;
     float yBounds = 35f;
     void Go()
     {
