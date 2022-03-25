@@ -13,6 +13,7 @@ public class SpawnManager : MonoBehaviour
     float lerpSpeed = 0.03f;
 
     float platformYOffset = 1.2f;
+
     public void SpawnPlatform(string key, PlatformSchema platSchema)
     {
         //Debug.Log("SpawnManager.SpawnPlatform! Type: " + platSchema.type);

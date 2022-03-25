@@ -8,12 +8,14 @@ public class PlatformBase : MonoBehaviour
     public PlatformSchema PlatformSchema;
     public string Key;
 
+    float platformYOffset = 1.2f;
+
     void FixedUpdate()
     {
         if (PlatformSchema?.position != null && (PlatformSchema?.position.x != transform.position.x || PlatformSchema?.position.y != transform.position.y))
         {
                 var t = Time.deltaTime * SpeedLerp;
-                Vector2 desiredPostion = new Vector3(PlatformSchema.position.x, PlatformSchema.position.y);
+                Vector2 desiredPostion = new Vector3(PlatformSchema.position.x, PlatformSchema.position.y + platformYOffset);
                 transform.position = Vector2.Lerp(transform.position, desiredPostion, t);
         }
     }

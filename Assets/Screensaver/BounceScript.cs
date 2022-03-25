@@ -8,7 +8,7 @@ public class BounceScript : MonoBehaviour
 
     [SerializeField]
     private float moveSpeed = 1f;
-    float xBounds = 80f;
+    float xBounds = 50f;
     float yBounds = 35f;
     void Go()
     {
