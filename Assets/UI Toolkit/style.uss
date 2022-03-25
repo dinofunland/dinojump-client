@@ -14,6 +14,11 @@
     min-height: 25px;
     -unity-font-definition: none;
     -unity-font: url('project://database/Assets/UI%20Toolkit/prstartk.ttf?fileID=12800000&guid=a80e4b465e7bf984896639dd277d87c6&type=3#prstartk');
+    padding-left: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .input-field {
