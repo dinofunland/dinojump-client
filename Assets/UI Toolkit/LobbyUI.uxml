@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=e8341d737e445d94086ea565b17d07eb&amp;type=3#style" />
     <ui:VisualElement class="root-container" style="margin-left: 100px; margin-right: 100px;">
         <ui:Label text="Lobby" display-tooltip-when-elided="true" name="title-text" class="title-text" style="-unity-font-definition: none; color: rgb(255, 228, 122);" />
-        <ui:Label text="#CODE#" display-tooltip-when-elided="true" name="lobby-code-text" enable-rich-text="true" class="your-score" style="-unity-font-definition: none;" />
+        <ui:VisualElement style="align-items: center; justify-content: center;" />
         <ui:VisualElement name="Container" style="flex-direction: row; flex-grow: 1; flex-wrap: nowrap; justify-content: space-between;">
             <ui:VisualElement>
                 <ui:Label text="Dinos" display-tooltip-when-elided="true" name="player-text" enable-rich-text="true" style="-unity-font: none; font-size: 18px; -unity-font-style: bold; color: rgb(207, 207, 207); -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 0; -unity-font-definition: url(&apos;project://database/Assets/UI%20Toolkit/prstartk.ttf?fileID=12800000&amp;guid=a80e4b465e7bf984896639dd277d87c6&amp;type=3#prstartk&apos;); margin-bottom: 15px;" />
@@ -22,6 +22,12 @@
         <ui:VisualElement style="margin-left: 200px; margin-right: 200px;">
             <ui:Button text="Ready?" display-tooltip-when-elided="true" name="ready-button" focusable="false" class="button-primary" style="flex-direction: column; justify-content: flex-end; align-items: center; white-space: nowrap; -unity-text-align: middle-center; flex-shrink: 0; -unity-font-definition: none;" />
             <ui:Button text="Leave Lobby" display-tooltip-when-elided="false" name="leave-button" focusable="false" class="button-primary" style="flex-direction: column; justify-content: flex-end; align-items: center; white-space: nowrap; -unity-text-align: middle-center; flex-shrink: 0; -unity-font-definition: none;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement style="align-items: flex-start;">
+        <ui:VisualElement style="align-items: center; background-color: rgba(96, 96, 112, 0.51); flex-direction: row; justify-content: center; padding-left: 5px; padding-right: 5px; padding-top: 10px; padding-bottom: 10px; flex-wrap: nowrap;">
+            <ui:VisualElement style="background-image: url(&apos;project://database/Assets/Sprites/Icons/key.png?fileID=2800000&amp;guid=2d354a956def4d443aeea56c03aecdb6&amp;type=3#key&apos;); width: 30px; height: 30px;" />
+            <ui:Label text="#CODE#" display-tooltip-when-elided="true" name="lobby-code-text" enable-rich-text="true" class="your-score" style="-unity-font-definition: none; padding-left: 5px; color: rgb(255, 255, 235); -unity-text-align: middle-center;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
