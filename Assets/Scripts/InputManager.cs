@@ -35,8 +35,16 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        // TODO handle modulationInput
-        modulationInput = Input.GetButton("Fire3");
+        var readyInput = Input.GetButton("Ready");
+        if (readyInput)
+        {
+            var lobbyUI = FindObjectOfType<LobbyUIHandler>();
+            if (lobbyUI != null)
+                lobbyUI.OnReady_Clicked();
+        }
+
+            // TODO handle modulationInput
+            modulationInput = Input.GetButton("Fire3");
     }
 
     async void SendPlayerMovement()

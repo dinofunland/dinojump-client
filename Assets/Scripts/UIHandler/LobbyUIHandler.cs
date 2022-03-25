@@ -26,7 +26,7 @@ public class LobbyUIHandler : MonoBehaviour
         InitializeUI();
     }
 
-    async void OnReady_Clicked()
+    public async void OnReady_Clicked()
     {
         if(RoomManager.Instance?.colyseusRoom != null)
         {
