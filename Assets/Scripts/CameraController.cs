@@ -27,6 +27,10 @@ public class CameraController : MonoBehaviour
                 CameraTarget = playerController.gameObject.transform;
             }
         }
+        if(CameraTarget == null)
+        {
+            transform.position = new Vector3(0, 0, -30);
+        }
     }
 
     void LateUpdate()

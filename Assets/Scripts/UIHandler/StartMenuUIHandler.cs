@@ -30,6 +30,7 @@ public class StartMenuUIHandler : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
         lobbyCodeText = root.Q<TextField>("lobby-code-input");
         playerNameText = root.Q<TextField>("player-name-input");
+        playerNameText.SetValueWithoutNotify(LoadPlayerName());
         newLobbyButton = root.Q<Button>("new-lobby-button");
         joinLobbyButton = root.Q<Button>("join-lobby-button");
 
@@ -54,16 +55,33 @@ public class StartMenuUIHandler : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(playerNameText.text))
         {
-            //GameManager.Instance.PlayerName = playerNameText.text;
+            SavePlayerName(playerNameText.text);
             GameManager.Instance.ConnectToLobby(playerNameText.text);
         } 
     }
+
 
     void OnJoinLobby_Clicked()
     {
         if (!string.IsNullOrEmpty(lobbyCodeText.text)  && !string.IsNullOrEmpty(playerNameText.text))
         {
+            SavePlayerName(playerNameText.text);
             GameManager.Instance?.ConnectToLobby(playerNameText.text, lobbyCodeText.text);
         }
     }
+
+    void SavePlayerName(string name)
+    {
+        PlayerPrefs.SetString("playername", name);
+    }
+    string LoadPlayerName()
+    {
+        string retVal = "";
+        if (PlayerPrefs.HasKey("playername"))
+        {
+            retVal = PlayerPrefs.GetString("playername");
+        }
+        return retVal;
+    }
+
 }
