@@ -10,40 +10,12 @@ using Action = System.Action;
 
 namespace Dinojump.Schemas {
 	public partial class InputSchema : Schema {
-		[Type(0, "boolean")]
-		public bool left = default(bool);
-
-		[Type(1, "boolean")]
-		public bool right = default(bool);
-
-		[Type(2, "number")]
+		[Type(0, "number")]
 		public float horizontal = default(float);
 
 		/*
 		 * Support for individual property change callbacks below...
 		 */
-
-		protected event PropertyChangeHandler<bool> _leftChange;
-		public Action OnLeftChange(PropertyChangeHandler<bool> handler) {
-			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
-			__callbacks.AddPropertyCallback(nameof(left));
-			_leftChange += handler;
-			return () => {
-				__callbacks.RemovePropertyCallback(nameof(left));
-				_leftChange -= handler;
-			};
-		}
-
-		protected event PropertyChangeHandler<bool> _rightChange;
-		public Action OnRightChange(PropertyChangeHandler<bool> handler) {
-			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
-			__callbacks.AddPropertyCallback(nameof(right));
-			_rightChange += handler;
-			return () => {
-				__callbacks.RemovePropertyCallback(nameof(right));
-				_rightChange -= handler;
-			};
-		}
 
 		protected event PropertyChangeHandler<float> _horizontalChange;
 		public Action OnHorizontalChange(PropertyChangeHandler<float> handler) {
@@ -58,8 +30,6 @@ namespace Dinojump.Schemas {
 
 		protected override void TriggerFieldChange(DataChange change) {
 			switch (change.Field) {
-				case nameof(left): _leftChange?.Invoke((bool) change.Value, (bool) change.PreviousValue); break;
-				case nameof(right): _rightChange?.Invoke((bool) change.Value, (bool) change.PreviousValue); break;
 				case nameof(horizontal): _horizontalChange?.Invoke((float) change.Value, (float) change.PreviousValue); break;
 				default: break;
 			}
