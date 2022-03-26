@@ -39,14 +39,16 @@
 }
 
 .player-list-item {
-    color: rgb(255, 0, 0);
-    font-size: 15px;
+    color: rgb(149, 144, 144);
+    font-size: 12px;
     -unity-text-align: upper-center;
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
     align-items: flex-start;
     padding-right: 1px;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/prstartk.ttf?fileID=12800000&guid=a80e4b465e7bf984896639dd277d87c6&type=3#prstartk');
+    -unity-font-definition: none;
 }
 
 .subtitle-text {
@@ -58,12 +60,14 @@
 
 .player-list-item-ready {
     color: rgb(0, 255, 2);
-    font-size: 15px;
+    font-size: 12px;
     -unity-text-align: upper-center;
     margin-left: 0;
     margin-right: 0;
     margin-top: 5px;
     align-items: flex-start;
+    -unity-font-definition: none;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/prstartk.ttf?fileID=12800000&guid=a80e4b465e7bf984896639dd277d87c6&type=3#prstartk');
 }
 
 .dino-option {
@@ -166,5 +170,4 @@
 .unity-label {
     -unity-font: url('project://database/Assets/UI%20Toolkit/prstartk.ttf?fileID=12800000&guid=a80e4b465e7bf984896639dd277d87c6&type=3#prstartk');
     -unity-font-definition: none;
-    color: rgba(126, 126, 143, 255);
 }

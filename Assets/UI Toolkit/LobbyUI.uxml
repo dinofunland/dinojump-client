@@ -7,7 +7,7 @@
             <ui:VisualElement>
                 <ui:Label text="Dinos" display-tooltip-when-elided="true" name="player-text" enable-rich-text="true" style="-unity-font: none; font-size: 18px; -unity-font-style: bold; color: rgb(207, 207, 207); -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 0; -unity-font-definition: url(&apos;project://database/Assets/UI%20Toolkit/prstartk.ttf?fileID=12800000&amp;guid=a80e4b465e7bf984896639dd277d87c6&amp;type=3#prstartk&apos;); margin-bottom: 15px;" />
                 <ui:VisualElement name="player-container" style="margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; align-items: flex-start; justify-content: flex-start; flex-direction: column; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
-                    <ui:Label text="Label" display-tooltip-when-elided="true" class="player-list-item" style="-unity-font-definition: none;" />
+                    <ui:Label text="Label" display-tooltip-when-elided="true" class="player-list-item" />
                     <ui:Label text="Label" display-tooltip-when-elided="true" class="player-list-item-ready" style="-unity-font-definition: none;" />
                     <ui:Label text="Label" display-tooltip-when-elided="true" class="player-list-item-ready" style="-unity-font-definition: none;" />
                 </ui:VisualElement>

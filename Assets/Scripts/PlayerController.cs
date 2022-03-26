@@ -32,6 +32,12 @@ public class PlayerController : MonoBehaviour
 
     private bool deathAnimationSet;
 
+    bool isWalking;
+    bool isJumping;
+    bool isFalling; 
+    bool isDancing;
+    bool isDead;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +60,18 @@ public class PlayerController : MonoBehaviour
             Vector2 desiredPostion = new Vector3(playerSchema.position.x, playerSchema.position.y);
             transform.position = Vector2.Lerp(transform.position, desiredPostion, t);
         }
+        if (!playerSchema.isDead && deathAnimationSet)
+        {
+            Debug.Log("Player alive again.");
+            spriteRenderer.sortingOrder = 0;
+            deathAnimationSet = false;
+            playerAnimator.SetBool("isDead", false);
+        }
+    }
+
+    private void LateUpdate()
+    {
+        //Debug.Log("Server AnimationState: " + playerSchema.animation);
         if (playerSchema?.skin != (int)currentSkin)
         {
             SetPlayerSkin();
@@ -63,7 +81,7 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.sortingOrder = 999;
             Vector3 newPos = transform.position;
 
-            //set lavaanimation on top of lavalake
+            //Set LavaSplash on Top of LavaLake
             var floor = FindObjectOfType<LavaController>();
             newPos.y = floor.GetComponentInChildren<SpriteRenderer>().bounds.extents.y + floor.transform.position.y + splashOffset;
             transform.position = newPos;
@@ -71,16 +89,21 @@ public class PlayerController : MonoBehaviour
             audioPlayer.PlayOneShot(dropSound);
             SetDeathAnimation();
         }
-        if ((AnimationState)playerSchema?.animation != currentAnimation || playerSchema?.input.left != currentLeft || playerSchema?.input.right != currentRight)
+        if ((AnimationState)playerSchema?.animation != currentAnimation)
         {
-            if (!playerSchema.isDead) 
+            if (!deathAnimationSet)
             {
-                Debug.Log("Setting AnimationState: " + playerSchema.animation);
-                deathAnimationSet = false;
-                spriteRenderer.sortingOrder = 0;
                 SetAnimationState();
+            } 
+        }
+        if (playerSchema?.input.left != currentLeft || playerSchema?.input.right != currentRight)
+        {
+            if (playerSchema.input.left || playerSchema.input.right)
+            {
+                currentLeft = playerSchema.input.left;
+                currentRight = playerSchema.input.right;
             }
-                
+            gameObject.GetComponent<SpriteRenderer>().flipX = !currentLeft;
         }
     }
 
@@ -88,22 +111,9 @@ public class PlayerController : MonoBehaviour
     {
         previousAnimation = this.currentAnimation;
         currentAnimation = (AnimationState)playerSchema?.animation;
-        if (playerSchema.input.left || playerSchema.input.right)
-        {
-            currentLeft = playerSchema.input.left;
-            currentRight = playerSchema.input.right;
-        }
 
-
-        ResetAnimationVariables();
-
-
-        gameObject.GetComponent<SpriteRenderer>().flipX = !currentLeft;
         switch (currentAnimation)
         {
-            default:
-                SetIdleAnimation();
-                break;
             case AnimationState.Walking:
                 SetWalkAnimation();
                 break;
@@ -119,6 +129,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case AnimationState.Dancing:
                 SetDanceAnimation();
+                break;
+            default:
+                    SetIdleAnimation();
                 break;
         }
     }
@@ -146,20 +159,33 @@ public class PlayerController : MonoBehaviour
 
     private void ResetAnimationVariables()
     {
-        playerAnimator.SetBool("isWalking", false);
-        playerAnimator.SetBool("isJumping", false);
-        playerAnimator.SetBool("isFalling", false);
-        playerAnimator.SetBool("isDancing", false);
-        playerAnimator.SetBool("isDead", false);
+        isWalking = false;
+        isJumping = false;
+        isFalling = false;
+        isDancing = false;
+        isDead = false;
+
+        SetAnimationVariables();
+    }
+
+    private void SetAnimationVariables()
+    {
+        playerAnimator.SetBool("isWalking", isWalking);
+        playerAnimator.SetBool("isJumping", isJumping);
+        playerAnimator.SetBool("isFalling", isFalling);
+        playerAnimator.SetBool("isDancing", isDancing);
+        playerAnimator.SetBool("isDead", isDead);
     }
 
     private void SetWalkAnimation()
     {
-        playerAnimator.SetBool("isWalking", true); 
+        playerAnimator.SetBool("isWalking", true);
+        playerAnimator.SetBool("isJumping", false);
     }
     private void SetJumpAnimation()
     {
         playerAnimator.SetBool("isJumping", true);
+        playerAnimator.SetTrigger("jump");
     }
     private void SetIdleAnimation()
     {
