@@ -19,7 +19,7 @@
                 <ui:Button display-tooltip-when-elided="true" name="yellow" focusable="false" class="dino-option yellowDinoSprite" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement style="margin-left: 200px; margin-right: 200px;">
+        <ui:VisualElement style="margin-left: 200px; margin-right: 200px; margin-top: 110px;">
             <ui:Button text="Ready?" display-tooltip-when-elided="true" name="ready-button" focusable="false" class="button-primary" style="flex-direction: column; justify-content: flex-end; align-items: center; white-space: nowrap; -unity-text-align: middle-center; flex-shrink: 0; -unity-font-definition: none;" />
             <ui:Button text="Leave Lobby" display-tooltip-when-elided="false" name="leave-button" focusable="false" class="button-primary" style="flex-direction: column; justify-content: flex-end; align-items: center; white-space: nowrap; -unity-text-align: middle-center; flex-shrink: 0; -unity-font-definition: none;" />
         </ui:VisualElement>

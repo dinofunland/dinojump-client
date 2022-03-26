@@ -27,8 +27,7 @@ public class PlayerController : MonoBehaviour
     private DinoPicker.DinoSkin currentSkin;
     private AnimationState currentAnimation;
     private AnimationState previousAnimation;
-    private bool currentLeft;
-    private bool currentRight;
+    private float currentHorizontal;
 
     private bool deathAnimationSet;
 
@@ -91,19 +90,20 @@ public class PlayerController : MonoBehaviour
         }
         if ((AnimationState)playerSchema?.animation != currentAnimation)
         {
-            if (!deathAnimationSet)
-            {
-                SetAnimationState();
-            } 
+            if (!deathAnimationSet) SetAnimationState();
         }
-        if (playerSchema?.input.left != currentLeft || playerSchema?.input.right != currentRight)
+        if (playerSchema?.input.horizontal != currentHorizontal)
         {
-            if (playerSchema.input.left || playerSchema.input.right)
-            {
-                currentLeft = playerSchema.input.left;
-                currentRight = playerSchema.input.right;
-            }
-            gameObject.GetComponent<SpriteRenderer>().flipX = !currentLeft;
+            if (!deathAnimationSet) SetFlipState();
+        }
+    }
+
+    private void SetFlipState()
+    {
+        currentHorizontal = playerSchema.input.horizontal;
+        if (currentHorizontal != 0)
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = currentHorizontal > 0 ? true : false;
         }
     }
 
