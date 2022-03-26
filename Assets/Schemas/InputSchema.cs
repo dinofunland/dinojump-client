@@ -16,6 +16,9 @@ namespace Dinojump.Schemas {
 		[Type(1, "boolean")]
 		public bool right = default(bool);
 
+		[Type(2, "number")]
+		public float horizontal = default(float);
+
 		/*
 		 * Support for individual property change callbacks below...
 		 */
@@ -42,10 +45,22 @@ namespace Dinojump.Schemas {
 			};
 		}
 
+		protected event PropertyChangeHandler<float> _horizontalChange;
+		public Action OnHorizontalChange(PropertyChangeHandler<float> handler) {
+			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
+			__callbacks.AddPropertyCallback(nameof(horizontal));
+			_horizontalChange += handler;
+			return () => {
+				__callbacks.RemovePropertyCallback(nameof(horizontal));
+				_horizontalChange -= handler;
+			};
+		}
+
 		protected override void TriggerFieldChange(DataChange change) {
 			switch (change.Field) {
 				case nameof(left): _leftChange?.Invoke((bool) change.Value, (bool) change.PreviousValue); break;
 				case nameof(right): _rightChange?.Invoke((bool) change.Value, (bool) change.PreviousValue); break;
+				case nameof(horizontal): _horizontalChange?.Invoke((float) change.Value, (float) change.PreviousValue); break;
 				default: break;
 			}
 		}

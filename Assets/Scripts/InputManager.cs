@@ -51,12 +51,7 @@ public class InputManager : MonoBehaviour
     {
         if (RoomManager.Instance?.colyseusRoom != null)
         {
-            if (horizontalInput == 0)
-                await RoomManager.Instance.colyseusRoom.Send("move", new { left = false, right = false });
-            if (horizontalInput > 0)
-                await RoomManager.Instance.colyseusRoom.Send("move", new { left = false, right = true });
-            if (horizontalInput < 0)
-                await RoomManager.Instance.colyseusRoom.Send("move", new { left = true, right = false });
+            await RoomManager.Instance.colyseusRoom.Send("inputHorizontal", horizontalInput);
         }
     }
 
