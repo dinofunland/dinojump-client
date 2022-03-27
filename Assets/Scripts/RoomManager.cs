@@ -36,7 +36,7 @@ public class RoomManager : MonoBehaviour
 
     public async Task ConnectLobby(string playerName, string code = null)
     {
-        if(IsConnecting) return;
+        if (IsConnecting) return;
         CreateClient();
 
         IsConnecting = true;
@@ -51,13 +51,13 @@ public class RoomManager : MonoBehaviour
             else
                 colyseusRoom = await colyseusClient.Create<GameSchema>("GameRoom", roomOptions);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             IsConnecting = false;
             throw ex;
         }
 
-        
+
         colyseusRoom.State.players.OnAdd(GameManager.Instance.OnPlayerAdd);
         colyseusRoom.State.players.OnRemove(GameManager.Instance.OnPlayerRemove);
         colyseusRoom.State.players.OnChange(GameManager.Instance.OnPlayerChange);
@@ -73,12 +73,12 @@ public class RoomManager : MonoBehaviour
         colyseusRoom.OnError += GameManager.Instance.OnLobbyError;
         colyseusRoom.OnLeave += OnLeaveLobby;
         colyseusRoom.OnError += OnLobbyError;
+
+        //colyseusRoom.OnMessage<object>(GameManager.Instance.OnEmoteMessage);
         GameManager.Instance.myPlayerKey = colyseusRoom.SessionId;
 
         IsConnecting = false;
     }
-
-
 
     public void Examples(string playerName)
     {

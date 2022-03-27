@@ -214,6 +214,12 @@ public class PlayerController : MonoBehaviour
         deathAnimationSet = true;
     }
 
+    public void HandleEmote(object eventInfo)
+    {
+        return;
+        GetComponent<EmoteController>().TriggerEmote(1);
+    }
+
     enum AnimationState
     { 
         Idle = 0,

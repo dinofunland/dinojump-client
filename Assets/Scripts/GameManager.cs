@@ -230,6 +230,17 @@ public class GameManager : MonoBehaviour
         spawnManager.RemovePlatform(key);
     }
 
+    public void OnEmoteMessage(object obj)
+    {
+        return;
+        var player = FindObjectsOfType<PlayerController>().FirstOrDefault(m => m.playerKey == obj);
+        if (player != null)
+        {
+            player.HandleEmote(obj);
+        }
+    }
+
+
     #endregion
 
     #region PlayerListeners
