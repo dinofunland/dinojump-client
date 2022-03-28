@@ -16,30 +16,34 @@ public class EmoteController : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    public void TriggerEmote(int type)
+    public void TriggerEmote(string type)
     {
+        int emote;
 
-        switch ((EmoteType)type)
+        if( int.TryParse( type , out emote))
         {
-            case EmoteType.Cry:
-                spriteRenderer.sprite = cryEmote;
-                break;
-            case EmoteType.Laugh:
-                spriteRenderer.sprite = laughEmote;
-                break;
-            case EmoteType.Heart:
-                spriteRenderer.sprite = heartEmote;
-                break;
-            case EmoteType.ThumbsUp:
-                spriteRenderer.sprite = thumbsupEmote;
-                break;
-        }
+            switch ((EmoteType)emote)
+            {
+                case EmoteType.Cry:
+                    spriteRenderer.sprite = cryEmote;
+                    break;
+                case EmoteType.Laugh:
+                    spriteRenderer.sprite = laughEmote;
+                    break;
+                case EmoteType.Heart:
+                    spriteRenderer.sprite = heartEmote;
+                    break;
+                case EmoteType.ThumbsUp:
+                    spriteRenderer.sprite = thumbsupEmote;
+                    break;
+            }
 
         spriteRenderer.enabled = true;
         StartCoroutine(Wait());
+        }
     }
 
-    enum EmoteType
+    public enum EmoteType
     {
         ThumbsUp = 0,
         Cry = 1,

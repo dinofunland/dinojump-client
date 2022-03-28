@@ -45,6 +45,16 @@ public class InputManager : MonoBehaviour
 
             // TODO handle modulationInput
             modulationInput = Input.GetButton("Fire3");
+
+        if(Input.GetButton("Emote"))
+        {
+            SendCryEmote();
+        }
+    }
+
+    async void SendCryEmote()
+    {
+        await RoomManager.Instance?.colyseusRoom.Send("emote", (int)EmoteController.EmoteType.Cry);
     }
 
     async void SendPlayerMovement()

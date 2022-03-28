@@ -5,6 +5,7 @@ using Colyseus;
 using Dinojump.Schemas;
 using System.Threading.Tasks;
 using System;
+using Dinojump;
 
 public class RoomManager : MonoBehaviour
 {
@@ -74,11 +75,12 @@ public class RoomManager : MonoBehaviour
         colyseusRoom.OnLeave += OnLeaveLobby;
         colyseusRoom.OnError += OnLobbyError;
 
-        //colyseusRoom.OnMessage<object>(GameManager.Instance.OnEmoteMessage);
+        colyseusRoom.OnMessage<EmoteMessage>("emote", GameManager.Instance.OnEmoteMessage);
         GameManager.Instance.myPlayerKey = colyseusRoom.SessionId;
 
         IsConnecting = false;
     }
+
 
     public void Examples(string playerName)
     {

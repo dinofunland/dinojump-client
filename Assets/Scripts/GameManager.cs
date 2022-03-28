@@ -1,4 +1,5 @@
 using Colyseus.Schema;
+using Dinojump;
 using Dinojump.Schemas;
 using System;
 using System.Collections;
@@ -230,13 +231,12 @@ public class GameManager : MonoBehaviour
         spawnManager.RemovePlatform(key);
     }
 
-    public void OnEmoteMessage(object obj)
+    public void OnEmoteMessage(EmoteMessage emoteMessage)
     {
-        return;
-        var player = FindObjectsOfType<PlayerController>().FirstOrDefault(m => m.playerKey == obj);
+        var player = FindObjectsOfType<PlayerController>().FirstOrDefault(m => m.playerKey == emoteMessage.sessionId);
         if (player != null)
         {
-            player.HandleEmote(obj);
+            player.HandleEmote(emoteMessage.emoteType);
         }
     }
 

@@ -214,10 +214,9 @@ public class PlayerController : MonoBehaviour
         deathAnimationSet = true;
     }
 
-    public void HandleEmote(object eventInfo)
+    public void HandleEmote(string type)
     {
-        return;
-        GetComponent<EmoteController>().TriggerEmote(1);
+        GetComponentInChildren<EmoteController>().TriggerEmote(type);
     }
 
     enum AnimationState
