@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuTheme: {fileID: 8300000, guid: 9e3129b3af2f40e4c99b27fb66fe657e, type: 3}
-  gameTheme: {fileID: 8300000, guid: 9e3129b3af2f40e4c99b27fb66fe657e, type: 3}
+  gameTheme: {fileID: 8300000, guid: 812603100fcbc7b42a534bad27e417ec, type: 3}
 --- !u!1 &406987803
 GameObject:
   m_ObjectHideFlags: 0

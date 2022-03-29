@@ -14,7 +14,10 @@ public class AudioManager : MonoBehaviour
     void Awake()
     {
         if (Instance != null)
+        {
             Destroy(gameObject);
+            return;
+        }
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
@@ -27,11 +30,13 @@ public class AudioManager : MonoBehaviour
     public void SetMenuTheme()
     {
         audioSource.clip = menuTheme;
+        audioSource.Play();
     }
 
     public void SetGameTheme()
     {
         audioSource.clip = gameTheme;
+        audioSource.Play();
     }
 
     public void SetVolume(float value)
