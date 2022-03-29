@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -8,6 +9,8 @@ public class InputManager : MonoBehaviour
     float horizontalInput;
     bool jumpInput;
     bool modulationInput;
+
+    bool lastEmoteButtonInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,9 +49,21 @@ public class InputManager : MonoBehaviour
             // TODO handle modulationInput
             modulationInput = Input.GetButton("Fire3");
 
-        if(Input.GetButton("Emote"))
+        var player = FindObjectsOfType<PlayerController>().FirstOrDefault(m => m.playerKey == GameManager.Instance.myPlayerKey);
+        EmoteWheel emoteWheel = null;
+        
+        if(player != null)
+            emoteWheel = player.gameObject.GetComponentInChildren<EmoteWheel>();
+
+        if (emoteWheel != null && !emoteWheel.isWheelOpen)
         {
-            SendCryEmote();
+            var emoteButton = Input.GetButton("Emote");
+            if (lastEmoteButtonInput != emoteButton)
+            {
+                lastEmoteButtonInput = emoteButton;
+                if(emoteButton)
+                 emoteWheel.OpenWheel();
+            }
         }
     }
 
@@ -56,6 +71,21 @@ public class InputManager : MonoBehaviour
     {
         await RoomManager.Instance?.colyseusRoom.Send("emote", (int)EmoteController.EmoteType.Cry);
     }
+    async void SendHeartEmote()
+    {
+        await RoomManager.Instance?.colyseusRoom.Send("emote", (int)EmoteController.EmoteType.Heart);
+    }
+
+    async void SendLaughEmote()
+    {
+        await RoomManager.Instance?.colyseusRoom.Send("emote", (int)EmoteController.EmoteType.Laugh);
+    }
+
+    async void SendThumbsUpEmote()
+    {
+        await RoomManager.Instance?.colyseusRoom.Send("emote", (int)EmoteController.EmoteType.ThumbsUp);
+    }
+
 
     async void SendPlayerMovement()
     {
