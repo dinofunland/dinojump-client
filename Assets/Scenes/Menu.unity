@@ -227,6 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 392593186}
   - component: {fileID: 392593185}
+  - component: {fileID: 392593187}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -345,6 +346,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &392593187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392593184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e9d2371d24e5841ae1c151404a914e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuTheme: {fileID: 8300000, guid: 9e3129b3af2f40e4c99b27fb66fe657e, type: 3}
+  gameTheme: {fileID: 8300000, guid: 9e3129b3af2f40e4c99b27fb66fe657e, type: 3}
 --- !u!1 &406987803
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f4ffc11e0244d4490ac1bf5309b2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 392593185}
 --- !u!1001 &2300033629124809232
 PrefabInstance:
   m_ObjectHideFlags: 0
