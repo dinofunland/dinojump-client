@@ -16,13 +16,12 @@ public class EmoteWheel : MonoBehaviour
     float lastVerticalInput = 0;
     bool lastEmoteButtonInput = true;
     float countDown = 0;
-    bool isForward = true;
 
 
     public void OpenWheel()
     {
         countDown = 0;
-        currentIndex = currentSelectedEmote-1;
+        currentIndex = currentSelectedEmote-1; //-1 because middle is the selected one
         emoteChosen = false;
         isWheelOpen = true;
         foreach (var item in wheelItems)
@@ -88,8 +87,6 @@ public class EmoteWheel : MonoBehaviour
                 currentIndex++;
                 if (currentIndex == emoteSprites.Length)
                     currentIndex = 0;
-
-                isForward = true;
                 ShowWheel(currentIndex);
             }
             if (verticalInput < 0)
@@ -117,7 +114,6 @@ public class EmoteWheel : MonoBehaviour
             if (currentSprite < 0)
             {
                 currentSprite = emoteSprites.Length - 1;
-                //invert
                 currentIndex = emoteSprites.Length - 1;
             }
 

@@ -7,6 +7,7 @@
             <ui:Button text="New Lobby" display-tooltip-when-elided="true" name="new-lobby-button" focusable="false" class="button-primary" style="margin-left: 2.3px; margin-right: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-top: 2px;" />
             <ui:TextField picking-mode="Ignore" label="Lobby Code" value="filler text" is-delayed="true" name="lobby-code-input" class="input-field" style="flex-direction: column; margin-left: 0; margin-right: 0;" />
             <ui:Button text="Join Lobby" display-tooltip-when-elided="true" name="join-lobby-button" focusable="false" class="button-primary" style="margin-left: 2.3px; margin-right: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+            <ui:Slider picking-mode="Ignore" label="Volume" value="50" high-value="100" name="volumeslider" />
             <ui:VisualElement name="error-messages" style="align-items: center; margin-top: 20px; margin-bottom: 20px; color: rgb(255, 0, 0); white-space: normal; flex-grow: 1; flex-wrap: wrap;">
                 <ui:Label text="Error occured" display-tooltip-when-elided="true" name="Error" />
             </ui:VisualElement>
