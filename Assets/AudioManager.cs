@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] AudioClip menuTheme;
     [SerializeField] AudioClip gameTheme;
 
+    [SerializeField] AudioMixer audioMixer;
+
     AudioSource audioSource;
+    
 
     public static AudioManager Instance;
     // Start is called before the first frame update
@@ -24,7 +28,7 @@ public class AudioManager : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = menuTheme;
-        audioSource.volume = GameManager.Instance.LoadVolumeValue();
+        audioMixer.SetFloat("MasterVolume", CalcVolume(LoadVolumeValue()));
     }
 
     public void SetMenuTheme()
@@ -41,6 +45,21 @@ public class AudioManager : MonoBehaviour
 
     public void SetVolume(float value)
     {
-        Instance.audioSource.volume = value;
+        audioMixer.SetFloat("MasterVolume", CalcVolume(value));
+        PlayerPrefs.SetFloat("volume", value);
+    }
+
+    float CalcVolume(float raw)
+    {
+        return Mathf.Log10(raw) * 20;
+    }
+    public float LoadVolumeValue()
+    {
+        float retVal = 0.5f;
+        if (PlayerPrefs.HasKey("playername"))
+        {
+            retVal = PlayerPrefs.GetFloat("volume");
+        }
+        return retVal;
     }
 }

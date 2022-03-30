@@ -51,22 +51,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
-    public void SaveVolumeValue(float volume)
-    {
-        PlayerPrefs.SetFloat("volume", volume);
-    }
-
-    public float LoadVolumeValue()
-    {
-        float retVal = 0.5f;
-        if (PlayerPrefs.HasKey("playername"))
-        {
-            retVal =  PlayerPrefs.GetFloat("volume");
-        }
-        return retVal;
-    }
-
     void ConstructGroundAndWalls()
     {
         //TODO: Change WallSize on Server

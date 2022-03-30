@@ -12,19 +12,12 @@ public class StartMenuUIHandler : MonoBehaviour
     Button newLobbyButton;
     Button joinLobbyButton;
     VisualElement errorMessagesContainer;
-    [SerializeField] AudioSource audioManager;
 
     // Start is called before the first frame update
     void OnEnable()
     {
         InitializeUI();
     }    
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void InitializeUI()
     {
@@ -36,16 +29,13 @@ public class StartMenuUIHandler : MonoBehaviour
         joinLobbyButton = root.Q<Button>("join-lobby-button");
 
         var volumeSlider = root.Q<Slider>("volumeslider");
-        var savedVolume = GameManager.Instance.LoadVolumeValue();
-        volumeSlider.SetValueWithoutNotify(savedVolume);
-        audioManager.volume = savedVolume;
+        var savedVolume = AudioManager.Instance.LoadVolumeValue();
+        volumeSlider.value = savedVolume;
+
         AudioManager.Instance.SetMenuTheme();
         volumeSlider.RegisterValueChangedCallback(v =>
         {
-            var oldValue = v.previousValue;
-            var newValue = v.newValue;
-            GameManager.Instance.SaveVolumeValue(newValue / 100);
-            AudioManager.Instance.SetVolume(v.newValue / 100);
+            AudioManager.Instance.SetVolume(v.newValue);
         });
 
         newLobbyButton.clicked += OnNewLobby_Clicked;

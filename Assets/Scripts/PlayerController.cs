@@ -17,9 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AnimatorOverrideController yellowAnim;
     [SerializeField] AnimatorOverrideController greenAnim;
     [SerializeField] AnimatorOverrideController purpleAnim;
-
-    [SerializeField] private AudioClip jumpSound;
-    [SerializeField] private AudioClip dropSound;
     private AudioSource audioPlayer;
 
     SpriteRenderer spriteRenderer;
@@ -43,8 +40,6 @@ public class PlayerController : MonoBehaviour
         currentSkin = DinoPicker.DinoSkin.Blue;
         audioPlayer = GetComponent<AudioSource>();
         playerAnimator = GetComponent<Animator>();
-        jumpSound.LoadAudioData();
-        dropSound.LoadAudioData();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -85,7 +80,7 @@ public class PlayerController : MonoBehaviour
             newPos.y = floor.GetComponentInChildren<SpriteRenderer>().bounds.extents.y + floor.transform.position.y + splashOffset;
             transform.position = newPos;
 
-            audioPlayer.PlayOneShot(dropSound);
+            GetComponentInChildren<AudioSource>().Play();
             SetDeathAnimation();
         }
         if ((AnimationState)playerSchema?.animation != currentAnimation)
@@ -120,7 +115,7 @@ public class PlayerController : MonoBehaviour
             case AnimationState.Jumping:
                 if (previousAnimation != AnimationState.Jumping && previousAnimation != AnimationState.Falling)
                 {
-                    audioPlayer.PlayOneShot(jumpSound);
+                    audioPlayer.Play();
                     SetJumpAnimation();
                 }
                 break;
