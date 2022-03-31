@@ -1,9 +1,18 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=e8341d737e445d94086ea565b17d07eb&amp;type=3#style" />
-    <ui:VisualElement style="align-items: flex-start; flex-direction: column; justify-content: flex-start; flex-grow: 1;">
-        <ui:VisualElement style="flex-grow: 1; align-items: flex-start; font-size: 20px; color: rgb(26, 180, 18); margin-left: 20px; margin-top: 20px; flex-direction: row; justify-content: flex-start;">
-            <ui:VisualElement style="background-image: url(&apos;project://database/Assets/Sprites/Icons/pokal2.png?fileID=2800000&amp;guid=dbe8d3acbf1ad84409cf0ec698073dc8&amp;type=3#pokal2&apos;); width: 32px; height: 32px;" />
-            <ui:Label text="0" display-tooltip-when-elided="true" name="score-text" style="color: rgb(255, 255, 255); -unity-font-definition: none;" />
+    <ui:VisualElement style="align-items: center; flex-direction: row; justify-content: center; flex-grow: 1;">
+        <ui:VisualElement name="LeftContainer" style="flex-grow: 1;">
+            <ui:VisualElement style="flex-grow: 1; align-items: flex-start; font-size: 20px; color: rgb(26, 180, 18); margin-left: 20px; margin-top: 20px; flex-direction: row; justify-content: flex-start;">
+                <ui:VisualElement style="background-image: url(&apos;project://database/Assets/Sprites/Icons/pokal2.png?fileID=2800000&amp;guid=dbe8d3acbf1ad84409cf0ec698073dc8&amp;type=3#pokal2&apos;); width: 32px; height: 32px;" />
+                <ui:Label text="0" display-tooltip-when-elided="true" name="score-text" style="color: rgb(255, 255, 255); -unity-font-definition: none;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="RightContainer" style="align-items: flex-start; justify-content: flex-end; flex-grow: 1; flex-direction: row; height: auto; width: auto; margin-right: 50px; margin-left: 50px; margin-top: 50px; margin-bottom: 50px;">
+            <ui:VisualElement name="LavaMeterBG" style="color: rgb(0, 0, 0); height: 312px; width: 43px; background-image: none; -unity-background-image-tint-color: rgb(56, 56, 56); background-color: rgba(255, 255, 255, 0); align-items: center; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-width: 3px; border-right-width: 3px; border-top-width: 3px; border-bottom-width: 3px;">
+                <ui:VisualElement name="LavaLevel" class="lavabar" style="bottom: -290px;" />
+                <ui:VisualElement name="MyPlayerLevel" class="playerbar" />
+                <ui:VisualElement name="EnemyPlayerLevel" class="enemybar" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

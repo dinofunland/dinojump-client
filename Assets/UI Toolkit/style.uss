@@ -171,3 +171,33 @@
     -unity-font: url('project://database/Assets/UI%20Toolkit/prstartk.ttf?fileID=12800000&guid=a80e4b465e7bf984896639dd277d87c6&type=3#prstartk');
     -unity-font-definition: none;
 }
+
+.enemybar {
+    position: relative;
+    background-color: rgb(0, 0, 0);
+    width: 55px;
+    height: 5px;
+    top: auto;
+    justify-content: center;
+    bottom: -166px;
+}
+
+.playerbar {
+    position: relative;
+    background-color: rgb(0, 154, 14);
+    width: 55px;
+    height: 5px;
+    top: auto;
+    justify-content: center;
+    bottom: -230px;
+}
+
+.lavabar {
+    position: relative;
+    background-color: rgb(176, 0, 0);
+    width: 55px;
+    height: 10px;
+    top: auto;
+    justify-content: center;
+    bottom: -300px;
+}
