@@ -8,7 +8,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="RightContainer" style="align-items: flex-start; justify-content: flex-end; flex-grow: 1; flex-direction: row; height: auto; width: auto; margin-right: 50px; margin-left: 50px; margin-top: 50px; margin-bottom: 50px;">
-            <ui:VisualElement name="LavaMeterBG" style="color: rgb(0, 0, 0); height: 312px; width: 43px; background-image: none; -unity-background-image-tint-color: rgb(56, 56, 56); background-color: rgba(255, 255, 255, 0); align-items: center; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-width: 3px; border-right-width: 3px; border-top-width: 3px; border-bottom-width: 3px;">
+            <ui:VisualElement name="LavaMeterBG" style="color: rgb(0, 0, 0); height: 312px; width: 43px; background-image: none; -unity-background-image-tint-color: rgb(56, 56, 56); background-color: rgba(255, 255, 255, 0); align-items: center; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-width: 3px; border-right-width: 3px; border-top-width: 3px; border-bottom-width: 3px; opacity: 1; display: flex;">
                 <ui:VisualElement name="LavaLevel" class="lavabar" style="bottom: -290px;" />
                 <ui:VisualElement name="MyPlayerLevel" class="playerbar" />
                 <ui:VisualElement name="EnemyPlayerLevel" class="enemybar" />

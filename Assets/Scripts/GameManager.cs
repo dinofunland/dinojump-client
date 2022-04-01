@@ -203,9 +203,10 @@ public class GameManager : MonoBehaviour
     {
         var countDownLabel = countdownUI.GetComponent<UIDocument>().rootVisualElement.Q<Label>("countdown-text");
         int i = 0;
-        while (i < 5)
+        int duration = 3;
+        while (i < duration)
         {
-            var countdownValue = 5 - i;
+            var countdownValue = duration - i;
             countDownLabel.text = countdownValue.ToString();
             i++;
             yield return new WaitForSeconds(1);

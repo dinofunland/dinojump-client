@@ -12,6 +12,7 @@ public class StartMenuUIHandler : MonoBehaviour
     Button newLobbyButton;
     Button joinLobbyButton;
     VisualElement errorMessagesContainer;
+    Toggle hideMeter;
 
     // Start is called before the first frame update
     void OnEnable()
@@ -27,6 +28,12 @@ public class StartMenuUIHandler : MonoBehaviour
         playerNameText.SetValueWithoutNotify(LoadPlayerName());
         newLobbyButton = root.Q<Button>("new-lobby-button");
         joinLobbyButton = root.Q<Button>("join-lobby-button");
+        hideMeter = root.Q<Toggle>("hidemeter");
+        hideMeter.RegisterValueChangedCallback(OnMeterToggleChanged);
+        if (PlayerPrefs.HasKey("hideMeter"))
+        {
+            hideMeter.value = PlayerPrefs.GetInt("hideMeter") > 0 ? true : false;
+        }
 
         var volumeSlider = root.Q<Slider>("volumeslider");
         var savedVolume = AudioManager.Instance.LoadVolumeValue();
@@ -62,6 +69,14 @@ public class StartMenuUIHandler : MonoBehaviour
             SavePlayerName(playerNameText.text);
             GameManager.Instance.ConnectToLobby(playerNameText.text);
         } 
+    }
+
+    void OnMeterToggleChanged(ChangeEvent<bool> evt)
+    {
+        if (evt.newValue)
+            PlayerPrefs.SetInt("hideMeter", 1);
+        else
+            PlayerPrefs.SetInt("hideMeter", 0);
     }
 
 
