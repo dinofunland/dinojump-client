@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="align-items: center; justify-content: center; height: 100%; padding-bottom: 60px;">
+        <ui:Label text="Connecting to server..." display-tooltip-when-elided="true" style="align-items: center; -unity-font: url(&apos;project://database/Assets/UI%20Toolkit/prstart.ttf?fileID=12800000&amp;guid=17c8ab5fcd7c99240834ac895e9fc6c3&amp;type=3#prstart&apos;); -unity-font-definition: none; font-size: 24px; -unity-text-align: middle-left; justify-content: flex-start; color: rgba(178, 178, 178, 255);" />
+    </ui:VisualElement>
+</ui:UXML>

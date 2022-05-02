@@ -12,6 +12,7 @@ public class RoomManager : MonoBehaviour
     private ColyseusClient colyseusClient;
     public ColyseusRoom<GameSchema> colyseusRoom;
 
+    public GameObject UIConnectingToServer;
     private bool IsConnecting = false;
 
     public static RoomManager Instance;
@@ -27,6 +28,7 @@ public class RoomManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        this.UIConnectingToServer.SetActive(false);
     }
 
     void CreateClient()
@@ -38,6 +40,7 @@ public class RoomManager : MonoBehaviour
     public async Task ConnectLobby(string playerName, string code = null)
     {
         if (IsConnecting) return;
+        this.UIConnectingToServer.SetActive(true);
         CreateClient();
 
         IsConnecting = true;
@@ -54,6 +57,7 @@ public class RoomManager : MonoBehaviour
         }
         catch (Exception ex)
         {
+            this.UIConnectingToServer.SetActive(false);
             IsConnecting = false;
             throw ex;
         }
@@ -78,6 +82,7 @@ public class RoomManager : MonoBehaviour
         colyseusRoom.OnMessage<EmoteMessage>("emote", GameManager.Instance.OnEmoteMessage);
         GameManager.Instance.myPlayerKey = colyseusRoom.SessionId;
 
+        this.UIConnectingToServer.SetActive(false);
         IsConnecting = false;
     }
 
