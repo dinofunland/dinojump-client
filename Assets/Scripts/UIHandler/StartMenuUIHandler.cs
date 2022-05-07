@@ -25,7 +25,11 @@ public class StartMenuUIHandler : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
         lobbyCodeText = root.Q<TextField>("lobby-code-input");
         playerNameText = root.Q<TextField>("player-name-input");
-        playerNameText.SetValueWithoutNotify(LoadPlayerName());
+        playerNameText.SetValueWithoutNotify("My Nickame");
+        var playerName = LoadPlayerName();
+        if(playerName != null && playerName != "") {
+            playerNameText.SetValueWithoutNotify(LoadPlayerName());
+        }
         newLobbyButton = root.Q<Button>("new-lobby-button");
         joinLobbyButton = root.Q<Button>("join-lobby-button");
         hideMeter = root.Q<Toggle>("hidemeter");
