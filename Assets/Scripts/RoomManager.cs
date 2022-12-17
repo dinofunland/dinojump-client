@@ -33,7 +33,7 @@ public class RoomManager : MonoBehaviour
 
     void CreateClient()
     {
-        colyseusClient = NetworkManager.Instance.CreateClient("wss://" + "dinojump-server.herokuapp.com");
+        colyseusClient = NetworkManager.Instance.CreateClient("wss://" + "dinojump-server-production.up.railway.app");
         // colyseusClient = NetworkManager.Instance.CreateClient("ws://" + "localhost:3002");
     }
 
