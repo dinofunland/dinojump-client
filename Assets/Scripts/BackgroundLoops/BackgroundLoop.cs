@@ -30,7 +30,7 @@ public class BackgroundLoop : MonoBehaviour
     private void LoadAdditionalRows(GameObject bgRow)
     {
         float objectHeight = bgRow.GetComponent<SpriteRenderer>().bounds.size.y - choke;
-        int childsNeeded = (int)Mathf.Ceil(screenBounds.y * 2 / objectHeight);
+        int childsNeeded = (int)Mathf.Ceil(screenBounds.y * 4 / objectHeight);
         GameObject rowClone = Instantiate(bgRow);
         for (int i = 0; i <= childsNeeded; i++)
         {
@@ -53,7 +53,7 @@ public class BackgroundLoop : MonoBehaviour
     GameObject LoadFirstRow(GameObject bgRow)
     {
         float objectWidth = bgRow.GetComponent<SpriteRenderer>().bounds.size.x - choke;
-        int childsNeeded = (int)Mathf.Ceil(screenBounds.x * 2 / objectWidth);
+        int childsNeeded = (int)Mathf.Ceil(screenBounds.x * 4 / objectWidth);
         GameObject clone = Instantiate(bgRow);
         bgRow.name = "BGRowOG";
         for (int i = 0; i <= childsNeeded; i++)

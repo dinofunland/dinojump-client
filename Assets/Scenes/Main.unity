@@ -487,7 +487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OffsetCamera: {x: 0, y: 15, z: -30}
-  SpeedCamera: 50000
+  SpeedCamera: 10
   IsFocusingPlayer: 1
   CameraTarget: {fileID: 0}
 --- !u!114 &1005557177
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
-  m_AssetsPPU: 64
+  m_AssetsPPU: 44
   m_RefResolutionX: 320
   m_RefResolutionY: 200
   m_CropFrame: 0

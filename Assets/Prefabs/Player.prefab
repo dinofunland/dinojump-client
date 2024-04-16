@@ -382,7 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529f5352e65e0fc448d291d58c904922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedLerp: 50000
+  SpeedLerp: 30
   playerKey: 
   blueAnim: {fileID: 22100000, guid: e2d9497d5fdc64c4a90ebdd77065857e, type: 2}
   yellowAnim: {fileID: 22100000, guid: f5c8c5ce1c06084459d007ee8c022493, type: 2}

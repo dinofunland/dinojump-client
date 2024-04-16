@@ -55,7 +55,7 @@ public class VerticalLoop : MonoBehaviour
     void LoadFirstRow(GameObject container)
     {
         float objectHeight = container.GetComponent<SpriteRenderer>().bounds.size.y - choke;
-        int childsNeeded = (int)Mathf.Ceil(screenBounds.y * 2 / objectHeight);
+        int childsNeeded = (int)Mathf.Ceil(screenBounds.y * 4 / objectHeight);
         GameObject clone = Instantiate(container);
         for (int i = 0; i <= childsNeeded; i++)
         {
