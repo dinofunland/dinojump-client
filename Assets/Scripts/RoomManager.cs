@@ -33,8 +33,8 @@ public class RoomManager : MonoBehaviour
 
     void CreateClient()
     {
-        colyseusClient = NetworkManager.Instance.CreateClient("wss://" + "dinojump-server-production.up.railway.app");
-        // colyseusClient = NetworkManager.Instance.CreateClient("ws://" + "localhost:3002");
+        colyseusClient = NetworkManager.Instance.CreateClient("wss://" + "dinojump-server.pibern.ch");
+        // colyseusClient = NetworkManager.Instance.CreateClient("ws://" + "localhost:3001");
     }
 
     public async Task ConnectLobby(string playerName, string code = null)
